@@ -95,3 +95,4 @@ export function AboutGallery({ items, labels }: Props) {
     </>
   );
 }
+

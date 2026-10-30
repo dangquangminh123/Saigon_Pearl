@@ -1,0 +1,790 @@
+/* Scoped CSS for Rescue & Care Handbook Page */
+.page {
+  --color-cream: #F7F4EE;
+  --color-sage: #DCE5D7;
+  --color-sage-soft: #E8F0E4;
+  --color-earth: #9B7862;
+  --color-earth-dark: #7B5D4B;
+  --color-dark: #453D35;
+  --color-white: #FFFEFB;
+  --color-line: rgba(69, 61, 53, 0.15);
+  --color-line-strong: rgba(69, 61, 53, 0.28);
+  --color-shadow: 0 12px 32px rgba(69, 61, 53, 0.08);
+  --color-shadow-card: 0 8px 24px rgba(69, 61, 53, 0.06);
+  --max-width: 1250px;
+
+  background-color: var(--color-cream);
+  color: var(--color-dark);
+  min-height: 100vh;
+  overflow: clip;
+}
+
+.page h1,
+.page h2,
+.page h3,
+.page blockquote {
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: -0.02em;
+}
+
+.container {
+  width: min(calc(100% - 48px), var(--max-width));
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   01. Page Head & SVG Wave Bottom
+   ========================================================================== */
+.headSection {
+  position: relative;
+  background-color: var(--color-sage);
+  padding: 42px 0 84px;
+}
+
+.headSection::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 42px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 40' preserveAspectRatio='none'%3E%3Cpath fill='%23F7F4EE' d='M0 40V22C240 2 480 0 720 14S1200 38 1440 18V40Z'/%3E%3C/svg%3E") center bottom / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 18px;
+}
+.breadcrumb a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.breadcrumb a:hover {
+  color: var(--color-earth);
+}
+.breadcrumb span:last-child {
+  color: var(--color-earth);
+}
+
+.stickerBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--color-white);
+  color: var(--color-earth);
+  border: 1px solid rgba(155, 120, 98, 0.3);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(69, 61, 53, 0.06);
+  transform: rotate(-1.5deg);
+}
+
+.pageTitle {
+  margin: 0 0 16px;
+  font-size: clamp(36px, 4.2vw, 56px);
+  line-height: 1.12;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.titleMarker {
+  color: var(--color-earth);
+  position: relative;
+  display: inline-block;
+}
+.titleMarker::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 6px;
+  background: rgba(155, 120, 98, 0.22);
+  border-radius: 3px;
+  z-index: -1;
+}
+
+.pageSubtitle {
+  margin: 0;
+  max-width: 68ch;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: #554D45;
+}
+
+/* ==========================================================================
+   02. Filter Tabs (Pills)
+   ========================================================================== */
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 36px 0 32px;
+}
+
+.filterPill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1.5px solid var(--color-white);
+  border-radius: 9999px;
+  background: var(--color-white);
+  color: var(--color-dark);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(69, 61, 53, 0.06);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.filterPill:hover {
+  border-color: var(--color-earth);
+  color: var(--color-earth);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(155, 120, 98, 0.18);
+}
+
+.filterPillActive {
+  background: var(--color-earth);
+  border-color: var(--color-earth);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 16px rgba(155, 120, 98, 0.28);
+}
+
+/* ==========================================================================
+   03. Featured Large Card (16:10 + Sticker photo)
+   ========================================================================== */
+.articlesList {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.card {
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-line-strong);
+  box-shadow: var(--color-shadow);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.65, 0.2, 1);
+}
+.card:hover .cardImage {
+  transform: scale(1.04);
+}
+
+/* Large Featured Card */
+.cardLarge {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  border-radius: 30px;
+  background: #FAF5EE;
+  border: 1px solid rgba(155, 120, 98, 0.2);
+  margin-bottom: 6px;
+}
+
+.cardLargeImageWrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  margin: 22px;
+  border: 6px solid #FFFFFF;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(69, 61, 53, 0.12);
+  transform: rotate(-1.5deg);
+  transition: transform 0.4s ease;
+}
+.cardLarge:hover .cardLargeImageWrap {
+  transform: rotate(0deg) scale(1.01);
+}
+
+.featuredBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(155, 120, 98, 0.95);
+  color: #FFFFFF;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(4px);
+}
+
+.cardLargeBody {
+  padding: 30px 36px 30px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardCategoryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.categoryBadge {
+  display: inline-block;
+  background: var(--color-sage);
+  color: var(--color-dark);
+  font-size: 12px;
+  font-weight: 750;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.03em;
+}
+
+.readTime {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  color: #7A7268;
+}
+
+.cardLargeTitle {
+  margin: 0;
+  font-size: clamp(24px, 2.5vw, 34px);
+  line-height: 1.22;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.titleLink {
+  all: unset;
+  cursor: pointer;
+  color: inherit;
+  transition: color 0.2s;
+  text-align: left;
+}
+.card:hover .titleLink {
+  color: var(--color-earth);
+}
+
+.cardSummary {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: #5C544C;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(69, 61, 53, 0.1);
+}
+
+.cardDate {
+  font-size: 13.5px;
+  color: #8C847B;
+}
+
+.readMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-earth);
+  transition: gap 0.25s ease;
+}
+.card:hover .readMoreBtn {
+  gap: 10px;
+  color: var(--color-earth-dark);
+}
+.arrowIcon {
+  transition: transform 0.25s ease;
+}
+.card:hover .arrowIcon {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   04. Horizontal Cards Grid (2 cols on desktop)
+   ========================================================================== */
+.horizontalCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.cardHorizontal {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: center;
+  border-radius: 20px;
+}
+
+.cardHorizontalImageWrap {
+  margin: 12px;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  position: relative;
+  background: var(--color-sage);
+}
+
+.cardHorizontalBody {
+  padding: 18px 22px 18px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardHorizontalTitle {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.cardSummaryHorizontal {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #635A52;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   05. Medical Caution Banner
+   ========================================================================== */
+.cautionBox {
+  margin: 48px 0 0;
+  padding: 22px 26px;
+  border-radius: 18px;
+  border-left: 5px solid var(--color-earth);
+  background: #FAF3E8;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.cautionIcon {
+  color: var(--color-earth);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.cautionText h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-earth-dark);
+}
+.cautionText p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #5A4E44;
+}
+
+/* ==========================================================================
+   06. FAQ Accordion Section
+   ========================================================================== */
+.faqSection {
+  padding: 85px 0 60px;
+}
+
+.faqHeader {
+  max-width: 760px;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+.faqHeader h2 {
+  font-size: clamp(28px, 3.2vw, 40px);
+  margin: 0 0 10px;
+  color: var(--color-dark);
+  font-weight: 700;
+}
+.faqHeader p {
+  margin: 0;
+  font-size: 15.5px;
+  color: #6D655D;
+}
+
+.faqList {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faqItem {
+  border: 1px solid var(--color-line);
+  border-radius: 20px;
+  background: var(--color-white);
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+.faqItem[open] {
+  border-color: rgba(155, 120, 98, 0.4);
+  box-shadow: 0 6px 20px rgba(69, 61, 53, 0.08);
+  background: #FFFFFF;
+}
+
+.faqSummary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 72px 20px 24px;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-dark);
+  cursor: pointer;
+  list-style: none;
+}
+.faqSummary::-webkit-details-marker {
+  display: none;
+}
+
+.faqSummary::after {
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  margin-top: -18px;
+  border-radius: 50%;
+  background: var(--color-sage);
+  color: var(--color-dark);
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 36px;
+  text-align: center;
+  transform: rotate(-6deg);
+  transition: all 0.25s ease;
+}
+
+.faqItem[open] .faqSummary::after {
+  content: '−';
+  background: var(--color-earth);
+  color: #FFFFFF;
+  transform: rotate(0deg);
+}
+
+.faqContent {
+  padding: 0 24px 22px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #554D45;
+}
+.faqContent p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   07. Emergency Call-To-Action Block
+   ========================================================================== */
+.ctaBlock {
+  margin: 60px 0 90px;
+  padding: 38px 44px;
+  border-radius: 26px;
+  background: var(--color-earth);
+  color: #FFFFFF;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+  box-shadow: 0 16px 40px rgba(155, 120, 98, 0.28);
+}
+
+.ctaIconWrap {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: var(--color-earth);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transform: rotate(-8deg);
+  flex-shrink: 0;
+}
+
+.ctaInfo h2 {
+  margin: 0 0 8px;
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.25;
+}
+.ctaInfo p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #F8F2EB;
+}
+
+.ctaButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.ctaBtnPrimary,
+.ctaBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 24px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.ctaBtnPrimary {
+  background: #FFFFFF;
+  color: var(--color-earth-dark);
+  border: 1.5px solid #FFFFFF;
+}
+.ctaBtnPrimary:hover {
+  background: #F7EFE7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.ctaBtnSecondary {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+}
+.ctaBtnSecondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   08. Modal Dialog for Article Preview
+   ========================================================================== */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(45, 35, 25, 0.75);
+  backdrop-filter: blur(5px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.modalDialog {
+  position: relative;
+  background: #FFFFFF;
+  width: min(100%, 780px);
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 24px;
+  padding: 36px 40px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  animation: modalFadeIn 0.25s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  background: var(--color-cream);
+  color: var(--color-dark);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.modalCloseBtn:hover {
+  background: var(--color-earth);
+  color: #FFFFFF;
+  border-color: var(--color-earth);
+}
+
+.modalHeader {
+  margin-bottom: 20px;
+  padding-right: 48px;
+}
+.modalTitle {
+  margin: 10px 0 8px;
+  font-size: clamp(24px, 2.8vw, 32px);
+  line-height: 1.25;
+  color: var(--color-dark);
+  font-weight: 700;
+}
+.modalMeta {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: #8C847B;
+}
+
+.modalImageWrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: var(--color-sage);
+}
+
+.modalBody {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #554D45;
+}
+.modalLead {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--color-dark);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.modalNotice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #F7EFE4;
+  border-radius: 14px;
+  padding: 18px 22px;
+  font-size: 14px;
+  color: #635446;
+  margin-top: 24px;
+}
+.modalNoticeIcon {
+  color: var(--color-earth);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.modalNotice p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   09. Responsive Queries
+   ========================================================================== */
+@media (max-width: 991px) {
+  .cardLarge {
+    grid-template-columns: 1fr;
+  }
+  .cardLargeBody {
+    padding: 0 24px 28px;
+  }
+  .cardLargeImageWrap {
+    margin: 18px;
+  }
+  .horizontalCardsGrid {
+    grid-template-columns: 1fr;
+  }
+  .ctaBlock {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+    gap: 20px;
+    padding: 32px 24px;
+  }
+  .ctaButtons {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .headSection {
+    padding-bottom: 60px;
+  }
+  .cardHorizontal {
+    grid-template-columns: 130px minmax(0, 1fr);
+  }
+  .cardHorizontalBody {
+    padding: 12px 14px;
+  }
+  .cardHorizontalTitle {
+    font-size: 16.5px;
+  }
+  .cardSummaryHorizontal {
+    display: none;
+  }
+  .faqSummary {
+    padding: 16px 56px 16px 18px;
+    font-size: 16px;
+  }
+  .faqSummary::after {
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    margin-top: -16px;
+    font-size: 19px;
+    line-height: 32px;
+  }
+  .ctaButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .ctaBtnPrimary,
+  .ctaBtnSecondary {
+    width: 100%;
+  }
+  .modalDialog {
+    padding: 24px 20px;
+  }
+}

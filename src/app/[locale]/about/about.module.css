@@ -185,3 +185,4 @@
   .page *, .page *::before, .page *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .revealPending { opacity: 1; transform: none; }
 }
+

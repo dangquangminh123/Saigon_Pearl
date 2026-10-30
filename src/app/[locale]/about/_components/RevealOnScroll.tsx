@@ -38,3 +38,4 @@ export function RevealOnScroll({
 
   return <div ref={ref} className={`${styles.revealWrapper} ${className}`}>{children}</div>;
 }
+

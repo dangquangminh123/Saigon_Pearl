@@ -155,3 +155,4 @@ export const aboutStory: Record<Locale, StoryCopy> = {
     ctaPrimary: 'Get involved', ctaSecondary: 'Explore adoption',
   },
 };
+
