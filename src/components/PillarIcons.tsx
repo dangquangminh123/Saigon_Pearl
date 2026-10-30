@@ -79,3 +79,4 @@ export function SupportHandsIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
