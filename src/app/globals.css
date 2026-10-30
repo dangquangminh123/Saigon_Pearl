@@ -1234,10 +1234,12 @@ img { display: block; }
   .impact-head { grid-column: auto; }
 }
 
-/* THÊM CUỐI src/app/globals.css. Chỉ đổi màu Header/Footer khi xem Our Story.
+/* THÊM CUỐI src/app/globals.css. Chỉ đổi màu Header/Footer khi xem Our Story, Rescue Care, Adopt Services.
    :has() hoạt động trên các trình duyệt hiện đại; nơi không hỗ trợ sẽ giữ màu gốc. */
 body:has([data-page="our-story"]),
-body:has([data-page="rescue-care"]) {
+body:has([data-page="rescue-care"]),
+body:has([data-page="adopt-services"]),
+body:has([data-page="get-involved"]) {
   --terracotta: #9B7862;
   --terracotta-dark: #795D4D;
   --coral: #9B7862;
@@ -1253,14 +1255,22 @@ body:has([data-page="rescue-care"]) {
 body:has([data-page="our-story"]) .site-header,
 body:has([data-page="our-story"]) .site-footer,
 body:has([data-page="rescue-care"]) .site-header,
-body:has([data-page="rescue-care"]) .site-footer {
+body:has([data-page="rescue-care"]) .site-footer,
+body:has([data-page="adopt-services"]) .site-header,
+body:has([data-page="adopt-services"]) .site-footer,
+body:has([data-page="get-involved"]) .site-header,
+body:has([data-page="get-involved"]) .site-footer {
   background-color: #F7F4EE;
 }
 body:has([data-page="our-story"]) .header-donate,
-body:has([data-page="rescue-care"]) .header-donate {
+body:has([data-page="rescue-care"]) .header-donate,
+body:has([data-page="adopt-services"]) .header-donate,
+body:has([data-page="get-involved"]) .header-donate {
   box-shadow: 0 4px 14px rgba(69, 61, 53, .13);
 }
 body:has([data-page="our-story"]) .mobile-nav,
-body:has([data-page="rescue-care"]) .mobile-nav {
+body:has([data-page="rescue-care"]) .mobile-nav,
+body:has([data-page="adopt-services"]) .mobile-nav,
+body:has([data-page="get-involved"]) .mobile-nav {
   background-color: #F7F4EE;
 }

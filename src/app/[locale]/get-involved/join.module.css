@@ -1,0 +1,584 @@
+/* Saigon Pearl Purrs - Get Involved / Tham Gia Page
+   Palette: #F7F4EE | #DCE5D7 | #9B7862 | #453D35 | #FFFEFB
+*/
+
+.joinPage {
+  background-color: #F7F4EE;
+  color: #453D35;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+   1. HERO BANNER
+   ========================================================================== */
+.heroBanner {
+  position: relative;
+  background-color: #EDE8DE;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(220, 229, 215, 0.65) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(155, 120, 98, 0.1) 0%, transparent 45%);
+  padding: 88px 0 100px;
+  text-align: center;
+  border-bottom: 1px solid rgba(155, 120, 98, 0.1);
+  overflow: hidden;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.breadcrumbs {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9B7862;
+  margin-bottom: 18px;
+  background: rgba(255, 254, 251, 0.7);
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(155, 120, 98, 0.16);
+  backdrop-filter: blur(4px);
+}
+
+.breadcrumbSep { color: #B5A89E; font-size: 12px; }
+.breadcrumbCurrent { color: #453D35; }
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #DCE5D7;
+  color: #2F3C2C;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 18px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(69, 61, 53, 0.05);
+}
+
+.heroTitle {
+  font-family: Georgia, "Playfair Display", serif;
+  font-size: clamp(34px, 4.8vw, 52px);
+  font-weight: 700;
+  color: #453D35;
+  line-height: 1.2;
+  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+}
+
+.heroSubtitle {
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.65;
+  color: #63574D;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   2. WAYS TO JOIN — 4-COLUMN CARDS
+   ========================================================================== */
+.waysSection {
+  padding: 70px 0 80px;
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 44px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #9B7862;
+  margin-bottom: 10px;
+}
+
+.sectionTitle {
+  font-family: Georgia, "Playfair Display", serif;
+  font-size: clamp(28px, 3.2vw, 38px);
+  font-weight: 700;
+  color: #453D35;
+  margin: 0 0 14px;
+  line-height: 1.25;
+}
+
+.sectionSubtitle {
+  font-size: 16px;
+  color: #6E6259;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.waysGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.wayCard {
+  background: #FFFEFB;
+  border-radius: 20px;
+  padding: 32px 24px 28px;
+  border: 1.5px solid rgba(155, 120, 98, 0.12);
+  box-shadow: 0 4px 18px rgba(69, 61, 53, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.wayCard::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #DCE5D7;
+  transition: background 0.3s ease, height 0.25s ease;
+}
+
+.wayCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(69, 61, 53, 0.1);
+  border-color: rgba(155, 120, 98, 0.25);
+}
+
+.wayCard:hover::before {
+  background: #9B7862;
+  height: 5px;
+}
+
+.wayIconWrap {
+  width: 62px;
+  height: 62px;
+  border-radius: 16px;
+  background: #DCE5D7;
+  color: #354432;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.wayCard:hover .wayIconWrap {
+  background: #9B7862;
+  color: #FFFEFB;
+  transform: rotate(6deg) scale(1.06);
+}
+
+.wayTitle {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #453D35;
+  margin: 0 0 10px;
+}
+
+.wayDesc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #675B51;
+  flex-grow: 1;
+  margin: 0 0 20px;
+}
+
+.wayBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #9B7862;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.wayBtn:hover {
+  gap: 10px;
+  color: #795D4D;
+}
+
+/* ==========================================================================
+   3. 4-STEP JOINING PROCESS
+   ========================================================================== */
+.processSection {
+  background: #FFFEFB;
+  padding: 85px 0;
+  border-top: 1px solid rgba(155, 120, 98, 0.12);
+  border-bottom: 1px solid rgba(155, 120, 98, 0.12);
+}
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 44px;
+  position: relative;
+}
+
+/* Timeline connector */
+.processGrid::before {
+  content: '';
+  position: absolute;
+  top: 52px;
+  left: calc(12.5% + 12px);
+  right: calc(12.5% + 12px);
+  height: 2px;
+  background: repeating-linear-gradient(to right, #9B7862 0px, #9B7862 8px, transparent 8px, transparent 16px);
+  z-index: 0;
+}
+
+.processCard {
+  background: #F7F4EE;
+  border-radius: 18px;
+  padding: 30px 22px 28px;
+  border: 1px solid rgba(155, 120, 98, 0.14);
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.processCard:hover {
+  transform: translateY(-5px);
+  background: #F2EDE3;
+  box-shadow: 0 8px 24px rgba(69, 61, 53, 0.08);
+}
+
+.stepNumber {
+  display: inline-block;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #9B7862;
+  line-height: 1;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+
+.stepIconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #DCE5D7;
+  color: #354432;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.stepTitle {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #453D35;
+  margin: 0 0 9px;
+}
+
+.stepDesc {
+  font-size: 14px;
+  color: #675B51;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==========================================================================
+   4. GOLDEN REQUIREMENTS / COMMITMENTS
+   ========================================================================== */
+.requirementsSection {
+  padding: 80px 0;
+}
+
+.reqBox {
+  background: #FFFEFB;
+  border: 2px dashed rgba(155, 120, 98, 0.28);
+  border-radius: 26px;
+  padding: 52px 44px;
+  box-shadow: 0 8px 32px rgba(69, 61, 53, 0.05);
+}
+
+.reqHeader {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 36px;
+}
+
+.reqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.reqItem {
+  background: #F7F4EE;
+  padding: 22px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(155, 120, 98, 0.1);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.reqItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(69, 61, 53, 0.07);
+}
+
+.reqIcon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #DCE5D7;
+  color: #334430;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reqTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #453D35;
+  margin: 0 0 6px;
+}
+
+.reqDesc {
+  font-size: 14px;
+  color: #65584E;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ==========================================================================
+   5. FAQ ACCORDION
+   ========================================================================== */
+.faqSection {
+  background: #FFFEFB;
+  padding: 80px 0;
+  border-top: 1px solid rgba(155, 120, 98, 0.12);
+}
+
+.faqList {
+  max-width: 860px;
+  margin: 36px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faqItem {
+  background: #F7F4EE;
+  border-radius: 18px;
+  border: 1px solid rgba(155, 120, 98, 0.14);
+  overflow: hidden;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.faqItem[open] {
+  background: #F2ECE1;
+  border-color: #9B7862;
+}
+
+.faqSummary {
+  padding: 20px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #453D35;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  user-select: none;
+}
+
+.faqSummary::-webkit-details-marker { display: none; }
+
+.faqIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #DCE5D7;
+  color: #354432;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.faqItem[open] .faqIcon {
+  transform: rotate(180deg);
+  background: #9B7862;
+  color: #FFFEFB;
+}
+
+.faqBody {
+  padding: 0 24px 22px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #62554B;
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. BOTTOM CTA DARK CARD
+   ========================================================================== */
+.ctaSection {
+  padding: 80px 0 100px;
+  text-align: center;
+}
+
+.ctaCard {
+  background: #453D35;
+  color: #FFFEFB;
+  border-radius: 28px;
+  padding: 62px 36px;
+  max-width: 960px;
+  margin: 0 auto;
+  box-shadow: 0 16px 48px rgba(69, 61, 53, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaCard::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(220, 229, 215, 0.1);
+  pointer-events: none;
+}
+
+.ctaCard::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(155, 120, 98, 0.12);
+  pointer-events: none;
+}
+
+.ctaTitle {
+  font-family: Georgia, serif;
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 700;
+  margin: 0 0 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaDesc {
+  font-size: 16px;
+  color: #DDD4CA;
+  max-width: 620px;
+  margin: 0 auto 34px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaPrimaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #9B7862;
+  color: #FFFEFB;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 30px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+  transition: all 0.25s ease;
+}
+
+.ctaPrimaryBtn:hover {
+  background: #BA947C;
+  transform: translateY(-2px);
+}
+
+.ctaSecondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #FFFEFB;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1.5px solid rgba(255, 254, 251, 0.35);
+  transition: all 0.25s ease;
+}
+
+.ctaSecondaryBtn:hover {
+  background: rgba(255, 254, 251, 0.12);
+  border-color: #FFFEFB;
+}
+
+/* ==========================================================================
+   7. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .waysGrid { grid-template-columns: repeat(2, 1fr); }
+  .processGrid { grid-template-columns: repeat(2, 1fr); }
+  .processGrid::before { display: none; }
+}
+
+@media (max-width: 768px) {
+  .heroBanner { padding: 60px 0 72px; }
+  .waysGrid { grid-template-columns: 1fr; }
+  .processGrid { grid-template-columns: 1fr; }
+  .reqGrid { grid-template-columns: 1fr; }
+  .reqBox { padding: 28px 18px; }
+}
+

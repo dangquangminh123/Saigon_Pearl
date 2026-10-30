@@ -1,0 +1,1076 @@
+/* Saigon Pearl Purrs - Adopt & Foster Services (Theme Wanzor Styled)
+   Palette: Background Kem #F7F4EE | Sage #DCE5D7 | Nâu đất #9B7862 | Nâu đậm #453D35 | Trắng ngà #FFFEFB
+*/
+
+.adoptPage {
+  background-color: #F7F4EE;
+  color: #453D35;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+   1. FEATURED TITLE BANNER (HERO / BREADCRUMB)
+   ========================================================================== */
+.featuredTitle {
+  position: relative;
+  background-color: #EDE8DE;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(220, 229, 215, 0.7) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(155, 120, 98, 0.12) 0%, transparent 45%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239B7862' fill-opacity='0.035' fill-rule='evenodd'%3E%3Ccircle cx='30' cy='30' r='3'/%3E%3Cpath d='M20 20c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm20 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/g%3E%3C/svg%3E");
+  padding: 85px 0 95px;
+  text-align: center;
+  border-bottom: 1px solid rgba(155, 120, 98, 0.12);
+  overflow: hidden;
+}
+
+.featuredInner {
+  position: relative;
+  z-index: 2;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.breadcrumbs {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9B7862;
+  margin-bottom: 16px;
+  background: rgba(255, 254, 251, 0.7);
+  padding: 6px 18px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(155, 120, 98, 0.16);
+}
+
+.breadcrumbSep {
+  color: #B5A89E;
+  font-size: 12px;
+}
+
+.breadcrumbCurrent {
+  color: #453D35;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #DCE5D7;
+  color: #354432;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(69, 61, 53, 0.05);
+}
+
+.mainTitle {
+  font-family: Georgia, "Playfair Display", serif;
+  font-size: clamp(34px, 4.8vw, 54px);
+  font-weight: 700;
+  color: #453D35;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+}
+
+.subTitle {
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.65;
+  color: #63574D;
+  margin: 0 auto 32px;
+  max-width: 720px;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px dashed rgba(155, 120, 98, 0.22);
+}
+
+.statItem {
+  background: rgba(255, 254, 251, 0.85);
+  padding: 14px 16px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(69, 61, 53, 0.05);
+  border: 1px solid rgba(155, 120, 98, 0.1);
+  transition: transform 0.25s ease;
+}
+
+.statItem:hover {
+  transform: translateY(-3px);
+}
+
+.statValue {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 700;
+  color: #9B7862;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: #5B4F46;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   2. SHAPE DIVIDER ANIMATED (WAVE TRANSITION)
+   ========================================================================== */
+.shapeDividerTop {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+  margin-bottom: -1px;
+}
+
+.shapeDividerTop svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 52px;
+}
+
+.shapeDividerTop .shapeFill {
+  fill: #EDE8DE;
+}
+
+/* ==========================================================================
+   3. SERVICES CATALOG SECTION (IMAGE-BOX-STYLE-2)
+   ========================================================================== */
+.servicesSection {
+  padding: 40px 0 100px;
+  position: relative;
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 50px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #9B7862;
+  margin-bottom: 10px;
+}
+
+.sectionTitle {
+  font-family: Georgia, "Playfair Display", serif;
+  font-size: clamp(28px, 3.2vw, 38px);
+  font-weight: 700;
+  color: #453D35;
+  margin: 0 0 14px;
+  line-height: 1.25;
+}
+
+.sectionSubtitle {
+  font-size: 16px;
+  color: #6E6259;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Filter Tabs */
+.filterTabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.filterBtn {
+  background: #FFFEFB;
+  border: 1.5px solid rgba(155, 120, 98, 0.2);
+  color: #544941;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.filterBtn:hover {
+  background: #DCE5D7;
+  color: #2F3B2C;
+  border-color: #B8C7B2;
+}
+
+.filterBtnActive {
+  background: #9B7862 !important;
+  color: #FFFEFB !important;
+  border-color: #9B7862 !important;
+  box-shadow: 0 4px 14px rgba(155, 120, 98, 0.3);
+}
+
+/* 4-Columns Grid (Wanzor style-2 layout) */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px 24px;
+}
+
+/* Master Image Box (Elementor image-box-style-2) */
+.masterImageBox {
+  margin: 110px 0 10px;
+  text-align: center;
+  position: relative;
+  overflow: visible;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.masterImageBox:hover {
+  transform: translateY(-8px);
+}
+
+/* Thumb circle on top */
+.thumb {
+  position: absolute;
+  top: -110px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 220px;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  z-index: 2;
+}
+
+.thumbInner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(69, 61, 53, 0.18);
+  border: 6px solid #FFFEFB;
+  background-color: #E2DBD0;
+  position: relative;
+}
+
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.masterImageBox:hover .thumbImg {
+  transform: scale(1.08);
+}
+
+/* Icon badge on bottom-right of circle thumb */
+.iconWrap {
+  position: absolute;
+  bottom: -6px;
+  right: 6px;
+  z-index: 3;
+}
+
+.masterIcon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background-color: #FFFEFB;
+  box-shadow: 2px 5px 28px rgba(69, 61, 53, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9B7862;
+  border: 2px solid #DCE5D7;
+  transition: all 0.3s ease;
+}
+
+.masterImageBox:hover .masterIcon {
+  background-color: #DCE5D7;
+  color: #354432;
+  transform: rotate(8deg) scale(1.06);
+}
+
+/* Content Wrap (Card body) */
+.contentWrap {
+  position: relative;
+  padding: 135px 24px 44px;
+  background-color: #FFFEFB;
+  border-radius: 20px;
+  box-shadow: 0 10px 45px rgba(69, 61, 53, 0.07);
+  border: 1px solid rgba(155, 120, 98, 0.12);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+}
+
+/* Sage bottom accent bar (wanzor :after) */
+.contentWrap::after {
+  position: absolute;
+  content: '';
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 18px;
+  z-index: -1;
+  background-color: #DCE5D7;
+  border-radius: 20px;
+  transform: translateY(-3px);
+  transition: 0.3s all ease;
+}
+
+.masterImageBox:hover .contentWrap::after {
+  transform: translateY(4px);
+  background-color: #9B7862;
+}
+
+.cardTag {
+  display: inline-block;
+  align-self: center;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6C5544;
+  background-color: #F1ECE2;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.headline {
+  font-family: Georgia, "Playfair Display", serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: #453D35;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  white-space: pre-line;
+  transition: color 0.3s ease;
+}
+
+.masterImageBox:hover .headline {
+  color: #9B7862;
+}
+
+.desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #65584E;
+  margin: 0 0 16px;
+  flex-grow: 1;
+}
+
+/* Button reveal at bottom on hover (btn-hover-2) */
+.urlWrap {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translate(-50%, 8px);
+  width: fit-content;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 5;
+}
+
+.masterImageBox:hover .urlWrap {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.masterButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #9B7862;
+  color: #FFFEFB;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(155, 120, 98, 0.35);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.masterButton:hover {
+  background-color: #795D4D;
+  transform: scale(1.05);
+}
+
+/* Mobile permanent button */
+@media (max-width: 992px) {
+  .urlWrap {
+    opacity: 1 !important;
+    transform: translate(-50%, 0) !important;
+  }
+}
+
+/* ==========================================================================
+   4. 4-STEP ADOPTION PROCESS SECTION
+   ========================================================================== */
+.processSection {
+  background: #FFFEFB;
+  padding: 90px 0;
+  border-top: 1px solid rgba(155, 120, 98, 0.12);
+  border-bottom: 1px solid rgba(155, 120, 98, 0.12);
+}
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  position: relative;
+  margin-top: 40px;
+}
+
+.processCard {
+  background: #F7F4EE;
+  border-radius: 18px;
+  padding: 32px 24px;
+  border: 1px solid rgba(155, 120, 98, 0.14);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.processCard:hover {
+  transform: translateY(-5px);
+  background: #F2EDE3;
+  box-shadow: 0 8px 24px rgba(69, 61, 53, 0.08);
+}
+
+.stepNumber {
+  display: inline-block;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #9B7862;
+  line-height: 1;
+  margin-bottom: 16px;
+  opacity: 0.85;
+}
+
+.stepIconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background-color: #DCE5D7;
+  color: #354432;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.stepTitle {
+  font-family: Georgia, serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #453D35;
+  margin: 0 0 10px;
+}
+
+.stepDesc {
+  font-size: 14px;
+  color: #675B51;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==========================================================================
+   5. SAFETY CRITERIA SECTION (GOLDEN REQUIREMENTS)
+   ========================================================================== */
+.requirementsSection {
+  padding: 85px 0;
+}
+
+.reqBox {
+  background-color: #FFFEFB;
+  border: 2px dashed rgba(155, 120, 98, 0.3);
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: 0 8px 32px rgba(69, 61, 53, 0.05);
+}
+
+.reqHeader {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 36px;
+}
+
+.reqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.reqItem {
+  background: #F7F4EE;
+  padding: 22px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(155, 120, 98, 0.1);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.reqIcon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #DCE5D7;
+  color: #334430;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reqTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #453D35;
+  margin: 0 0 6px;
+}
+
+.reqDesc {
+  font-size: 14px;
+  color: #65584E;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. MONA SEC FORM SUBSCRIBE (2-COLUMNS BANNER)
+   ========================================================================== */
+.monaSecFormSubscribe {
+  padding: 40px 0 90px;
+}
+
+.subscribeInner {
+  background: linear-gradient(135deg, #E6EDE2 0%, #EDE7DC 100%);
+  border-radius: 28px;
+  padding: 56px 48px;
+  border: 1.5px solid rgba(155, 120, 98, 0.18);
+  box-shadow: 0 16px 48px rgba(69, 61, 53, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.subscribeLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.bigIconWrap {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #FFFEFB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9B7862;
+  box-shadow: 0 8px 24px rgba(69, 61, 53, 0.12);
+  margin-bottom: 24px;
+}
+
+.subscribeBadge {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9B7862;
+  margin-bottom: 8px;
+}
+
+.subscribeTitle {
+  font-family: Georgia, serif;
+  font-size: clamp(26px, 2.8vw, 34px);
+  font-weight: 700;
+  color: #453D35;
+  line-height: 1.25;
+  margin: 0 0 14px;
+}
+
+.subscribeDesc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #63574D;
+  margin: 0 0 20px;
+}
+
+.subscribeNote {
+  font-size: 13px;
+  color: #7A6F66;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Subscribe Right (Form) */
+.subscribeForm {
+  background: #FFFEFB;
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 10px 30px rgba(69, 61, 53, 0.07);
+  border: 1px solid rgba(155, 120, 98, 0.14);
+}
+
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.formLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #554A42;
+  margin-bottom: 6px;
+}
+
+.formInput,
+.formSelect {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(155, 120, 98, 0.22);
+  background: #F7F4EE;
+  color: #453D35;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.formInput:focus,
+.formSelect:focus {
+  outline: none;
+  border-color: #9B7862;
+  background: #FFFEFB;
+  box-shadow: 0 0 0 3px rgba(155, 120, 98, 0.15);
+}
+
+.formSubmitBtn {
+  width: 100%;
+  background-color: #9B7862;
+  color: #FFFEFB;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(155, 120, 98, 0.3);
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.formSubmitBtn:hover {
+  background-color: #795D4D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(155, 120, 98, 0.38);
+}
+
+.formSuccess {
+  background: #DCE5D7;
+  color: #2F3E2C;
+  padding: 20px 24px;
+  border-radius: 14px;
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.55;
+  border: 1px solid #B8C7B2;
+}
+
+/* ==========================================================================
+   7. FAQ ACCORDION SECTION
+   ========================================================================== */
+.faqSection {
+  padding: 80px 0;
+  background: #FFFEFB;
+  border-top: 1px solid rgba(155, 120, 98, 0.12);
+}
+
+.faqList {
+  max-width: 860px;
+  margin: 36px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faqItem {
+  background: #F7F4EE;
+  border-radius: 18px;
+  border: 1px solid rgba(155, 120, 98, 0.14);
+  overflow: hidden;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.faqItem[open] {
+  background: #F2ECE1;
+  border-color: #9B7862;
+}
+
+.faqSummary {
+  padding: 20px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #453D35;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  user-select: none;
+}
+
+.faqSummary::-webkit-details-marker {
+  display: none;
+}
+
+.faqIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #DCE5D7;
+  color: #354432;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.faqItem[open] .faqIcon {
+  transform: rotate(180deg);
+  background: #9B7862;
+  color: #FFFEFB;
+}
+
+.faqBody {
+  padding: 0 24px 22px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #62554B;
+  margin: 0;
+}
+
+/* ==========================================================================
+   8. BOTTOM CTA CALLOUT
+   ========================================================================== */
+.ctaBottomSection {
+  padding: 85px 0 100px;
+  text-align: center;
+}
+
+.ctaCard {
+  background: #453D35;
+  color: #FFFEFB;
+  border-radius: 28px;
+  padding: 60px 32px;
+  max-width: 960px;
+  margin: 0 auto;
+  box-shadow: 0 16px 48px rgba(69, 61, 53, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaCard::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(220, 229, 215, 0.12);
+  pointer-events: none;
+}
+
+.ctaTitle {
+  font-family: Georgia, serif;
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+.ctaDesc {
+  font-size: 16px;
+  color: #DDD4CA;
+  max-width: 620px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.ctaPrimaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #9B7862;
+  color: #FFFEFB;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 30px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+.ctaPrimaryBtn:hover {
+  background-color: #BA947C;
+  transform: translateY(-2px);
+}
+
+.ctaSecondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: #FFFEFB;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1.5px solid rgba(255, 254, 251, 0.35);
+  transition: all 0.25s ease;
+}
+
+.ctaSecondaryBtn:hover {
+  background-color: rgba(255, 254, 251, 0.12);
+  border-color: #FFFEFB;
+}
+
+/* ==========================================================================
+   9. INTERACTIVE SERVICE DETAIL MODAL
+   ========================================================================== */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(45, 39, 34, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.modalContent {
+  background: #FFFEFB;
+  border-radius: 24px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border: 1.5px solid rgba(155, 120, 98, 0.2);
+  position: relative;
+  animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modalHeader {
+  padding: 28px 32px 18px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(155, 120, 98, 0.12);
+}
+
+.modalCloseBtn {
+  background: #F7F4EE;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #453D35;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modalCloseBtn:hover {
+  background: #DCE5D7;
+  transform: rotate(90deg);
+}
+
+.modalBody {
+  padding: 24px 32px 32px;
+}
+
+.modalImageHero {
+  width: 100%;
+  height: 220px;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 1px solid rgba(155, 120, 98, 0.15);
+}
+
+.modalOverview {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #554A42;
+  margin-bottom: 20px;
+}
+
+.modalHighlightTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #453D35;
+  margin: 0 0 10px;
+}
+
+.modalHighlightList {
+  margin: 0 0 20px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modalHighlightList li {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #63574D;
+}
+
+.modalCommitmentBox {
+  background: #DCE5D7;
+  padding: 16px 20px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #2E3C2B;
+  margin-bottom: 24px;
+  border: 1px solid #B8C7B2;
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ==========================================================================
+   10. RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 24px;
+  }
+  .processGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .statsRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .featuredTitle {
+    padding: 60px 0 75px;
+  }
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+  .subscribeInner {
+    grid-template-columns: 1fr;
+    padding: 36px 24px;
+    gap: 32px;
+  }
+  .subscribeForm {
+    padding: 24px 20px;
+  }
+  .reqGrid {
+    grid-template-columns: 1fr;
+  }
+  .reqBox {
+    padding: 32px 20px;
+  }
+  .statsRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .modalContent {
+    margin: 16px;
+    max-height: 85vh;
+  }
+  .modalHeader, .modalBody {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
