@@ -91,14 +91,20 @@ export default async function HomePage({ params }: Props) {
         <div className="container pillars-grid">
           {t.home.pillars.map((item, index) => {
             const Icon = pillarIcons[index];
+            const pillarLinks = ['/rescue', '/adopt', '/about', '/support'];
             return (
-              <div className="pillar" key={item.title}>
-                <div className="pillar-illustration" tabIndex={0} role="img" aria-label={item.title}>
+              <Link
+                href={routeFor(locale, pillarLinks[index])}
+                className="pillar"
+                key={item.title}
+                aria-label={`${item.title}: ${item.description}`}
+              >
+                <div className="pillar-illustration" role="img" aria-label={item.title}>
                   <Icon className="pillar-svg" width={46} height={46} />
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
-              </div>
+              </Link>
             );
           })}
         </div>

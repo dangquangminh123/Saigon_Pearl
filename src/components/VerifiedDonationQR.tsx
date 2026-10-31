@@ -125,11 +125,11 @@ export function VerifiedDonationQR({ locale }: { locale: Locale }) {
     <section
       aria-label={isVi ? 'Thông tin ủng hộ đã xác minh' : 'Verified donation details'}
       style={{
-        margin: '36px 0',
-        padding: '32px 28px',
+        margin: '32px 0',
+        padding: '24px 20px',
         background: '#FAF8F4',
         border: '1.5px solid #DCE5D7',
-        borderRadius: 24,
+        borderRadius: 22,
         boxShadow: '0 8px 30px rgba(69, 61, 53, 0.05)',
       }}
     >
@@ -145,6 +145,7 @@ export function VerifiedDonationQR({ locale }: { locale: Locale }) {
           fontWeight: 600,
           color: '#2D4B2A',
           marginBottom: 20,
+          flexWrap: 'wrap',
         }}
       >
         <ShieldCheck size={18} color="#2D4B2A" aria-hidden="true" />
@@ -154,32 +155,33 @@ export function VerifiedDonationQR({ locale }: { locale: Locale }) {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: 32,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
+          gap: 24,
           alignItems: 'center',
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
           <div
             style={{
-              padding: 16,
+              padding: 12,
               background: '#FFFFFF',
-              borderRadius: 20,
+              borderRadius: 18,
               border: '1px solid #E8E5DF',
               boxShadow: '0 6px 20px rgba(0,0,0,0.04)',
+              maxWidth: '100%',
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={data.qrDataUrl}
               alt={isVi ? 'Mã QR đóng góp của dự án Saigon Pearl Purrs' : 'Project donation QR code'}
-              width={260}
-              height={260}
-              style={{ display: 'block', borderRadius: 12 }}
+              width={240}
+              height={240}
+              style={{ display: 'block', borderRadius: 10, maxWidth: '100%', height: 'auto' }}
               onError={() => setState({ status: 'error' })}
             />
           </div>
-          <p style={{ marginTop: 12, fontSize: '0.88rem', color: '#7A6F65' }}>
+          <p style={{ marginTop: 10, fontSize: '0.85rem', color: '#7A6F65' }}>
             {isVi ? 'Quét bằng app ngân hàng bất kỳ (VietQR)' : 'Scan with any banking app (VietQR)'}
           </p>
         </div>
@@ -275,3 +277,4 @@ export function VerifiedDonationQR({ locale }: { locale: Locale }) {
     </section>
   );
 }
+

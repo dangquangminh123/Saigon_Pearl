@@ -23,6 +23,17 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     setMenuOpen(false);
   }, [pathname]);
 
+  // Close mobile navigation on viewport resize above mobile breakpoint
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1040) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
     if (menuOpen) {
@@ -100,6 +111,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                   key={key}
                   href={href}
                   className={`mobile-nav-link ${isActive ? 'active' : ''}`}
+                  onClick={() => setMenuOpen(false)}
                 >
                   <span>{t.nav[key]}</span>
                 </Link>
@@ -110,15 +122,16 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             <Link
               href={routeFor(locale, '/support')}
               className="mobile-nav-donate-btn"
+              onClick={() => setMenuOpen(false)}
             >
               <Heart size={16} fill="currentColor" aria-hidden="true" />
               <span>{t.nav.donate}</span>
             </Link>
             <div className="mobile-lang-switch">
               <span className="mobile-lang-label">{t.nav.language}:</span>
-              <Link href={localeLink('vi')} className={locale === 'vi' ? 'is-current' : ''}>VI</Link>
+              <Link href={localeLink('vi')} className={locale === 'vi' ? 'is-current' : ''} onClick={() => setMenuOpen(false)}>VI</Link>
               <span className="lang-sep">|</span>
-              <Link href={localeLink('en')} className={locale === 'en' ? 'is-current' : ''}>EN</Link>
+              <Link href={localeLink('en')} className={locale === 'en' ? 'is-current' : ''} onClick={() => setMenuOpen(false)}>EN</Link>
             </div>
           </div>
         </nav>
