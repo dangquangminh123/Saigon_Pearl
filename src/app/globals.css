@@ -37,10 +37,11 @@ body {
   margin: 0;
   background: var(--cream);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
-button, input, textarea, select { font: inherit; }
+button, input, textarea, select { font-family: inherit; }
 button { cursor: pointer; }
 a { color: inherit; text-decoration: none; }
 img { display: block; }
@@ -82,8 +83,9 @@ img { display: block; }
 .page-intro h1,
 .display-heading,
 .story-heading,
-.footer-quote {
-  font-family: Georgia, 'Times New Roman', serif;
+.footer-quote,
+.brand-name {
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: -0.025em;
 }
 
@@ -268,7 +270,7 @@ img { display: block; }
   flex-direction: column;
 }
 .brand-name {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 20px;
   line-height: 1.15;
   font-weight: 700;
@@ -687,7 +689,7 @@ img { display: block; }
   margin: 0 0 7px;
   font-size: 19px;
   font-weight: 700;
-  font-family: Georgia, serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--forest);
 }
 .pillar p {
@@ -753,7 +755,7 @@ img { display: block; }
   text-decoration: none;
 }
 .cat-name-row h3 {
-  font-family: Georgia, serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 21px;
   font-weight: 700;
   color: var(--forest);
@@ -871,7 +873,7 @@ img { display: block; }
   gap: 10px;
 }
 .story-side-badge p {
-  font-family: Georgia, serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 17px;
   font-weight: 700;
   line-height: 1.35;
@@ -899,7 +901,7 @@ img { display: block; }
   align-items: center;
 }
 .impact-head {
-  font-family: Georgia, serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 25px;
   color: var(--forest);
   line-height: 1.2;
@@ -946,7 +948,7 @@ img { display: block; }
 .impact-info h3 {
   font-size: 21px;
   color: var(--forest);
-  font-family: Georgia, serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 700;
   line-height: 1.15;
   margin: 0 0 3px;
@@ -1001,7 +1003,7 @@ img { display: block; }
 }
 .action-copy h3 {
   margin: 0 0 7px;
-  font-family: Georgia, serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 18px;
   font-weight: 700;
   line-height: 1.2;
@@ -1108,7 +1110,7 @@ img { display: block; }
   font-size: 11.5px;
 }
 .footer-quote {
-  font-family: Georgia, serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif;
   font-style: italic;
   font-size: 12.5px;
   color: #5C534B;
@@ -1168,7 +1170,7 @@ img { display: block; }
 .page-content { padding: 65px 0 85px; }
 .prose { color: #5C554E; font-size: 15px; line-height: 1.9; }
 .prose p { margin: 0 0 16px; }
-.prose h2 { font-family: Georgia, serif; color: var(--forest); font-size: 30px; line-height: 1.2; margin: 0 0 15px; }
+.prose h2 { font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif; color: var(--forest); font-size: 30px; line-height: 1.2; margin: 0 0 15px; }
 .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: center; }
 .photo-large { position: relative; aspect-ratio: 1.28; border-radius: 20px; overflow: hidden; background: #DDE5D7; }
 
@@ -1189,7 +1191,7 @@ img { display: block; }
   background: var(--terracotta);
   color: #FFFFFF;
 }
-.value-card h3, .step-card h3 { font-family: Georgia, serif; font-size: 21px; color: var(--forest); margin: 0 0 9px; }
+.value-card h3, .step-card h3 { font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif; font-size: 21px; color: var(--forest); margin: 0 0 9px; }
 .value-card p, .step-card p { color: #6D675E; font-size: 13.5px; line-height: 1.75; margin: 0; }
 
 .centered-quote {
@@ -1197,7 +1199,10 @@ img { display: block; }
   text-align: center;
   max-width: 820px;
   margin: auto;
-  font: italic clamp(22px, 2.8vw, 36px)/1.4 Georgia, serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 36px);
+  line-height: 1.4;
   color: var(--terracotta);
 }
 
@@ -1212,8 +1217,8 @@ img { display: block; }
   transition: transform 0.25s ease;
 }
 .step-card:hover { transform: translateY(-3px); }
-.step-number { font: italic 28px Georgia, serif; color: var(--terracotta); margin-bottom: 18px; }
-.content-heading { font: 700 clamp(26px, 2.8vw, 38px)/1.2 Georgia, serif; color: var(--forest); margin: 0 0 26px; max-width: 770px; }
+.step-number { font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif; font-style: italic; font-size: 28px; color: var(--terracotta); margin-bottom: 18px; }
+.content-heading { font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: clamp(26px, 2.8vw, 38px); line-height: 1.2; color: var(--forest); margin: 0 0 26px; max-width: 770px; }
 
 /* FAQ */
 .faq-list { max-width: 900px; display: grid; gap: 12px; }
@@ -1250,7 +1255,7 @@ img { display: block; }
 .contact-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: 6%; align-items: start; }
 .contact-form-card { border: 1px solid var(--outline); border-radius: 16px; padding: 32px; background: white; box-shadow: var(--shadow); }
 .contact-form-title { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
-.contact-form-title h2 { font: 700 28px Georgia, serif; color: var(--forest); margin: 0; }
+.contact-form-title h2 { font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 28px; color: var(--forest); margin: 0; }
 .icon-circle {
   width: 44px; height: 44px;
   background: var(--blush-peach); color: var(--terracotta);
@@ -1281,7 +1286,7 @@ img { display: block; }
   background: #FFFEFC; border-radius: 18px; padding: 28px; box-shadow: 0 20px 80px rgba(0, 0, 0, 0.2);
 }
 .search-panel-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-.search-panel-top h2 { margin: 0; color: var(--forest); font: 700 28px Georgia, serif; }
+.search-panel-top h2 { margin: 0; color: var(--forest); font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 28px; }
 .search-field {
   display: flex; align-items: center; gap: 10px;
   border: 1.5px solid #D7D1C5; background: #FAF8F3; color: var(--terracotta); border-radius: 10px; padding: 0 15px;
@@ -1302,19 +1307,19 @@ img { display: block; }
 .transparency-symbol:hover {
   background: var(--forest-green); color: #fff; transform: scale(1.08);
 }
-.transparency-inner h2 { color: var(--forest); font: 700 clamp(24px, 2.3vw, 32px)/1.16 Georgia, serif; margin: 0 0 8px; }
+.transparency-inner h2 { color: var(--forest); font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: clamp(24px, 2.3vw, 32px); line-height: 1.16; margin: 0 0 8px; }
 .transparency-inner p { max-width: 740px; margin: 0; color: #4F6352; font-size: 13.5px; line-height: 1.7; }
 
 /* Closing strip */
 .closing-strip { padding: 42px 15px; background: #FAF5EB; text-align: center; }
-.closing-strip p { font: italic 22px/1.5 Georgia, serif; color: var(--terracotta); margin: 0; }
+.closing-strip p { font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif; font-style: italic; font-size: 22px; line-height: 1.5; color: var(--terracotta); margin: 0; }
 
 /* CTA Panel */
 .cta-panel {
   border-radius: 18px; padding: 38px 42px; background: #DFE8DB;
   display: flex; gap: 28px; align-items: center; justify-content: space-between;
 }
-.cta-panel h2 { font: 700 32px Georgia, serif; color: var(--forest); margin: 0 0 10px; }
+.cta-panel h2 { font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 32px; color: var(--forest); margin: 0 0 10px; }
 .cta-panel p { margin: 0; max-width: 700px; line-height: 1.75; font-size: 14px; color: #4F6352; }
 
 /* ==========================================================================
@@ -1664,7 +1669,9 @@ img { display: block; }
 body:has([data-page="our-story"]),
 body:has([data-page="rescue-care"]),
 body:has([data-page="adopt-services"]),
-body:has([data-page="get-involved"]) {
+body:has([data-page="get-involved"]),
+body:has([data-page="community-stories"]),
+body:has([data-page="community-article"]) {
   --terracotta: #9B7862;
   --terracotta-dark: #795D4D;
   --coral: #9B7862;
@@ -1684,18 +1691,26 @@ body:has([data-page="rescue-care"]) .site-footer,
 body:has([data-page="adopt-services"]) .site-header,
 body:has([data-page="adopt-services"]) .site-footer,
 body:has([data-page="get-involved"]) .site-header,
-body:has([data-page="get-involved"]) .site-footer {
+body:has([data-page="get-involved"]) .site-footer,
+body:has([data-page="community-stories"]) .site-header,
+body:has([data-page="community-stories"]) .site-footer,
+body:has([data-page="community-article"]) .site-header,
+body:has([data-page="community-article"]) .site-footer {
   background-color: #F7F4EE;
 }
 body:has([data-page="our-story"]) .header-donate,
 body:has([data-page="rescue-care"]) .header-donate,
 body:has([data-page="adopt-services"]) .header-donate,
-body:has([data-page="get-involved"]) .header-donate {
+body:has([data-page="get-involved"]) .header-donate,
+body:has([data-page="community-stories"]) .header-donate,
+body:has([data-page="community-article"]) .header-donate {
   box-shadow: 0 4px 14px rgba(69, 61, 53, .13);
 }
 body:has([data-page="our-story"]) .mobile-nav,
 body:has([data-page="rescue-care"]) .mobile-nav,
 body:has([data-page="adopt-services"]) .mobile-nav,
-body:has([data-page="get-involved"]) .mobile-nav {
+body:has([data-page="get-involved"]) .mobile-nav,
+body:has([data-page="community-stories"]) .mobile-nav,
+body:has([data-page="community-article"]) .mobile-nav {
   background-color: #F7F4EE;
 }

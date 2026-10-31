@@ -7,6 +7,7 @@ import { getDictionary } from '@/lib/dictionaries';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { siteUrl } from '@/lib/site';
+import { beVietnamPro } from '@/lib/fonts';
 
 export const dynamicParams = false;
 export const viewport: Viewport = { themeColor: '#F7F4EE', width: 'device-width', initialScale: 1 };
@@ -34,7 +35,7 @@ export default async function LocaleLayout({ children, params }: {
     availableLanguage: ['Vietnamese', 'English'],
   };
   return (
-    <html lang={locale}>
+    <html lang={locale} className={beVietnamPro.variable}>
       <body>
         <a href="#main" className="skip-link">{locale === 'vi' ? 'Chuyển đến nội dung chính' : 'Skip to main content'}</a>
         <SiteHeader locale={locale} />
