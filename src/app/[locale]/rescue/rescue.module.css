@@ -259,7 +259,9 @@
 }
 
 .categoryBadge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: var(--color-sage);
   color: var(--color-dark);
   font-size: 12px;
@@ -267,6 +269,8 @@
   padding: 5px 12px;
   border-radius: 9999px;
   letter-spacing: 0.03em;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 .readTime {
@@ -353,8 +357,8 @@
 
 .cardHorizontal {
   display: grid;
-  grid-template-columns: 210px minmax(0, 1fr);
-  align-items: stretch;
+  grid-template-columns: 200px minmax(0, 1fr);
+  align-items: center;
   border-radius: 20px;
   background: var(--color-white);
   border: 1px solid var(--color-line);
@@ -362,20 +366,26 @@
 }
 
 .cardHorizontalImageWrap {
+  align-self: center;
+  width: calc(100% - 28px);
+  max-width: 172px;
+  aspect-ratio: 4 / 3;
+  height: auto;
   margin: 14px;
   border-radius: 14px;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
   position: relative;
   background: var(--color-sage);
+  flex-shrink: 0;
 }
 
 .cardHorizontalBody {
-  padding: 18px 22px 18px 6px;
+  padding: 18px 22px 18px 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
+  min-width: 0;
 }
 
 .cardHorizontalTitle {
@@ -738,10 +748,14 @@
     gap: 20px;
   }
   .cardHorizontal {
-    grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-columns: 210px minmax(0, 1fr);
+    align-items: center;
+  }
+  .cardHorizontalImageWrap {
+    max-width: 182px;
   }
   .cardHorizontalBody {
-    padding: 20px 24px 20px 8px;
+    padding: 20px 24px 20px 14px;
   }
 }
 
@@ -830,6 +844,8 @@
     margin: 12px 12px 0;
     aspect-ratio: 16 / 10;
     width: auto;
+    max-width: none;
+    align-self: auto;
     border-radius: 14px;
   }
   .cardHorizontalBody {

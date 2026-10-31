@@ -75,11 +75,11 @@ export function RescueCatalog({
 
             <div className={styles.cardLargeBody}>
               <div className={styles.cardCategoryRow}>
-                <span className={styles.categoryBadge}>{featuredArticle.categoryLabel[locale]}</span>
                 <span className={styles.readTime}>
                   <Clock size={13} aria-hidden="true" />
                   {featuredArticle.readTime[locale]}
                 </span>
+                <span className={styles.categoryBadge}>{featuredArticle.categoryLabel[locale]}</span>
               </div>
 
               <h2 className={styles.cardLargeTitle}>
@@ -121,11 +121,11 @@ export function RescueCatalog({
 
               <div className={styles.cardHorizontalBody}>
                 <div className={styles.cardCategoryRow}>
-                  <span className={styles.categoryBadge}>{article.categoryLabel[locale]}</span>
                   <span className={styles.readTime}>
                     <Clock size={12} aria-hidden="true" />
                     {article.readTime[locale]}
                   </span>
+                  <span className={styles.categoryBadge}>{article.categoryLabel[locale]}</span>
                 </div>
 
                 <h3 className={styles.cardHorizontalTitle}>
