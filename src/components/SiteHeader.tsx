@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Heart, Menu, Search, X } from 'lucide-react';
 import type { Locale } from '@/lib/i18n';
 import { routeFor } from '@/lib/i18n';
@@ -18,12 +18,29 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const localeLink = (next: Locale) => pathname.replace(/^\/(vi|en)(?=\/|$)/, `/${next}`) || `/${next}`;
 
+  // Close mobile navigation on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
   // Menu items filter (excluding support from regular text links because it is the CTA button)
   const menuNav = navigation.filter((item) => item.key !== 'support');
 
   return (
     <>
-      <header className="site-header">
+      <header className={`site-header ${menuOpen ? 'header-menu-active' : ''}`}>
         <div className="container header-inner">
           <Brand locale={locale} />
           <nav className="desktop-nav" aria-label={locale === 'vi' ? 'Điều hướng chính' : 'Main navigation'}>
@@ -50,20 +67,61 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               <Heart size={14} fill="currentColor" aria-hidden="true" />
               <span>{t.nav.donate}</span>
             </Link>
-            <button type="button" className="icon-button mobile-menu-toggle" aria-label={menuOpen ? t.nav.close : t.nav.menu} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}>
+            <button
+              type="button"
+              className="icon-button mobile-menu-toggle"
+              aria-label={menuOpen ? t.nav.close : t.nav.menu}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setMenuOpen((prev) => !prev)}
+            >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
-        {menuOpen && (
-          <nav id="mobile-navigation" className="mobile-nav" aria-label={locale === 'vi' ? 'Điều hướng di động' : 'Mobile navigation'}>
-            {navigation.map(({ key, path }) => (
-              <Link key={key} href={routeFor(locale, path)} className={pathname === routeFor(locale, path) ? 'active' : ''} onClick={() => setMenuOpen(false)}>
-                {t.nav[key]}
-              </Link>
-            ))}
-          </nav>
-        )}
+
+        {/* Mobile Navigation Drawer & Backdrop */}
+        <div
+          className={`mobile-nav-backdrop ${menuOpen ? 'is-open' : ''}`}
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        />
+        <nav
+          id="mobile-navigation"
+          className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}
+          aria-label={locale === 'vi' ? 'Điều hướng di động' : 'Mobile navigation'}
+        >
+          <div className="mobile-nav-links">
+            {navigation.map(({ key, path }) => {
+              const href = routeFor(locale, path);
+              const isActive = pathname === href || (path === '' && pathname === `/${locale}`);
+              return (
+                <Link
+                  key={key}
+                  href={href}
+                  className={`mobile-nav-link ${isActive ? 'active' : ''}`}
+                >
+                  <span>{t.nav[key]}</span>
+                </Link>
+              );
+            })}
+          </div>
+          <div className="mobile-nav-footer">
+            <Link
+              href={routeFor(locale, '/support')}
+              className="mobile-nav-donate-btn"
+            >
+              <Heart size={16} fill="currentColor" aria-hidden="true" />
+              <span>{t.nav.donate}</span>
+            </Link>
+            <div className="mobile-lang-switch">
+              <span className="mobile-lang-label">{t.nav.language}:</span>
+              <Link href={localeLink('vi')} className={locale === 'vi' ? 'is-current' : ''}>VI</Link>
+              <span className="lang-sep">|</span>
+              <Link href={localeLink('en')} className={locale === 'en' ? 'is-current' : ''}>EN</Link>
+            </div>
+          </div>
+        </nav>
       </header>
       {searchOpen && <SearchDialog locale={locale} onClose={() => setSearchOpen(false)} />}
     </>

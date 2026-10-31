@@ -1036,41 +1036,99 @@
 
 @media (max-width: 768px) {
   .featuredTitle {
-    padding: 60px 0 75px;
+    padding: 50px 0 65px;
+  }
+  .mainTitle {
+    font-size: clamp(24px, 6.5vw, 36px);
+  }
+  .subTitle {
+    font-size: 14.5px;
+    margin-bottom: 22px;
   }
   .servicesGrid {
     grid-template-columns: 1fr;
-    max-width: 420px;
+    max-width: 380px;
     margin: 0 auto;
+    gap: 40px 16px;
+  }
+  .filterTabs {
+    gap: 6px;
+    margin-bottom: 32px;
+  }
+  .filterBtn {
+    padding: 7px 14px;
+    font-size: 13px;
   }
   .processGrid {
     grid-template-columns: 1fr;
   }
   .subscribeInner {
     grid-template-columns: 1fr;
-    padding: 36px 24px;
-    gap: 32px;
+    padding: 30px 18px;
+    gap: 24px;
   }
   .subscribeForm {
-    padding: 24px 20px;
+    padding: 20px 16px;
   }
   .reqGrid {
     grid-template-columns: 1fr;
   }
   .reqBox {
-    padding: 32px 20px;
+    padding: 28px 16px;
   }
   .statsRow {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
+  .statItem {
+    padding: 10px 12px;
+  }
+  .statValue {
+    font-size: 22px;
+  }
+  .statLabel {
+    font-size: 11.5px;
+  }
   .modalContent {
-    margin: 16px;
-    max-height: 85vh;
+    margin: 12px;
+    max-height: 90vh;
   }
   .modalHeader, .modalBody {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-inline: 14px;
+  }
+  .masterImageBox {
+    margin: 90px 0 10px;
+  }
+  .thumb {
+    width: 180px;
+    height: 180px;
+    top: -90px;
+  }
+  .thumbInner {
+    border-width: 4px;
+  }
+  .iconWrap {
+    width: 46px;
+    height: 46px;
+    bottom: -4px;
+    right: 4px;
+  }
+  .iconWrap svg {
+    width: 20px;
+    height: 20px;
+  }
+  .headline {
+    font-size: 19px;
+  }
+  .desc {
+    font-size: 13.5px;
   }
 }
 
