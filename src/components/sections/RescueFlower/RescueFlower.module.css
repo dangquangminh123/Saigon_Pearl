@@ -17,20 +17,20 @@
   --badge-mask: url('/assets/saigon-pearl-purrs/flower-step-leaf.svg');
   --center-mask: url('/assets/saigon-pearl-purrs/flower-center-ring.svg');
 
-  --stage-w: 1150px;
-  --stage-h: 890px;
-  --petal-w: 315px;
-  --petal-h: 374px;
-  --petal-r: 225px;
-  --text-r: 269px;
-  --icon-r: 172px;
-  --badge-r: 375px;
-  --badge-w: 116px;
-  --center-w: 305px;
-  --copy-w: 166px;
+  --stage-w: 1120px;
+  --stage-h: 1080px;
+  --petal-w: 330px;
+  --petal-h: 396px;
+  --petal-r: 272px;
+  --text-r: 312px;
+  --icon-r: 204px;
+  --badge-r: 476px;
+  --badge-w: 104px;
+  --center-w: 276px;
+  --copy-w: 170px;
   --copy-title: 15px;
-  --copy-desc: 11px;
-  --icon-size: 31px;
+  --copy-desc: 11.5px;
+  --icon-size: 30px;
   --petal-hover: 1.016;
 
   /* This section occupies its own full-width row at the END of /adopt. */
@@ -195,8 +195,8 @@
   color: var(--sp-white); line-height: 1; text-shadow: 0 2px 5px rgba(69,61,53,.25);
   transform: translate(-50%, -50%) rotate(calc(-1 * var(--leaf-angle)));
 }
-.badgeText small { font-weight: 700; font-size: 10px; letter-spacing: .04em; }
-.badgeText strong { font-size: 30px; font-weight: 800; letter-spacing: -.045em; }
+.badgeText small { font-weight: 700; font-size: 9px; letter-spacing: .04em; }
+.badgeText strong { font-size: 27px; font-weight: 800; letter-spacing: -.045em; }
 
 /* Center circle is above petal bases; ring comes from source SVG #3. */
 .center {
@@ -218,17 +218,17 @@
 }
 .centerContent {
   position: relative; z-index: 3; display: flex; flex-direction: column;
-  align-items: center; text-align: center; padding: 18px 36px;
+  align-items: center; text-align: center; padding: 14px 24px;
 }
-.centerPaw { color: var(--sp-earth); margin-bottom: 7px; }
+.centerPaw { color: var(--sp-earth); margin-bottom: 5px; }
 .centerName {
   font-family: var(--font-be-vietnam), system-ui, sans-serif;
-  font-size: 24px; line-height: 1.18; font-weight: 800;
+  font-size: 22px; line-height: 1.15; font-weight: 800;
   color: var(--sp-brown); letter-spacing: -.055em;
 }
-.centerName span { display: block; color: var(--sp-earth); font-size: 32px; }
-.centerShort { font-size: 11px; font-weight: 650; margin-top: 5px; color: var(--sp-brown); }
-.centerTagline { font-size: 10px; line-height: 1.3; font-weight: 700; color: var(--sp-earth); margin-top: 5px; }
+.centerName span { display: block; color: var(--sp-earth); font-size: 28px; }
+.centerShort { font-size: 11px; font-weight: 650; margin-top: 4px; color: var(--sp-brown); }
+.centerTagline { font-size: 9.5px; line-height: 1.3; font-weight: 700; color: var(--sp-earth); margin-top: 4px; }
 
 /* Hover transforms ONLY masked shape layers, never an unmasked rectangle. */
 @media (hover: hover) and (pointer: fine) {
@@ -251,24 +251,30 @@
   animation-delay: var(--petal-delay);
 }
 
-/* RESPONSIVE — 1200..1399: radial composition, all dimensions scale down. */
+/* RESPONSIVE — 1200..1399: radial composition, all dimensions scale down proportionally with clear spacing. */
 @media (min-width:1200px) and (max-width:1399.98px) {
-  .section { --stage-w: 1040px; --stage-h: 810px; --petal-w: 295px; --petal-h: 350px;
-    --petal-r: 207px; --text-r: 248px; --icon-r: 160px; --badge-r: 343px;
-    --badge-w: 108px; --center-w: 282px; --copy-w: 155px;
-    --copy-title: 14px; --copy-desc: 10.5px; --icon-size: 29px; }
+  .section {
+    --stage-w: 1040px; --stage-h: 960px;
+    --petal-w: 300px; --petal-h: 360px;
+    --petal-r: 248px; --text-r: 284px; --icon-r: 186px; --badge-r: 432px;
+    --badge-w: 96px; --center-w: 252px; --copy-w: 154px;
+    --copy-title: 14px; --copy-desc: 10.8px; --icon-size: 28px;
+  }
 }
-/* RESPONSIVE — 992..1199: smaller radial petals and typography, no overlap with center. */
+/* RESPONSIVE — 992..1199: smaller radial petals and typography, clear separation from center and badge. */
 @media (min-width:992px) and (max-width:1199.98px) {
-  .section { --stage-w: 910px; --stage-h: 740px; --petal-w: 270px; --petal-h: 322px;
-    --petal-r: 185px; --text-r: 223px; --icon-r: 149px; --badge-r: 313px;
-    --badge-w: 94px; --center-w: 254px; --copy-w: 135px;
-    --copy-title: 12.4px; --copy-desc: 9.6px; --icon-size: 26px;
-    padding: 66px 13px 62px; }
+  .section {
+    --stage-w: 940px; --stage-h: 860px;
+    --petal-w: 268px; --petal-h: 320px;
+    --petal-r: 220px; --text-r: 252px; --icon-r: 166px; --badge-r: 386px;
+    --badge-w: 86px; --center-w: 228px; --copy-w: 136px;
+    --copy-title: 12.5px; --copy-desc: 9.8px; --icon-size: 25px;
+    padding: 66px 13px 62px;
+  }
   .badgeText small { font-size: 8px; }
-  .badgeText strong { font-size: 25px; }
-  .centerName { font-size: 21px; }
-  .centerName span { font-size: 27px; }
+  .badgeText strong { font-size: 24px; }
+  .centerName { font-size: 20px; }
+  .centerName span { font-size: 26px; }
 }
 /* RESPONSIVE — base tablet/mobile strategy. Keep actual petal mask; rearrange only geometry. */
 @media (max-width:991.98px) {
