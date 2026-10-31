@@ -14,6 +14,7 @@
   --earth: #9B7862;
   --brown: #453D35;
   --ivory: #FFFDF9;
+  --quadrant-border: #FFFDF9;
   --heart-file: url('/assets/saigon-pearl-purrs/rescue-heart/heart-center.svg');
   --figure-width: 750px;
   --seam: 5px;
@@ -67,6 +68,7 @@
   grid-template-rows: minmax(0, 46fr) minmax(0, 54fr);
   gap: var(--seam);
   isolation: isolate;
+  filter: drop-shadow(0 14px 28px rgba(155, 120, 98, 0.16)) drop-shadow(0 2px 6px rgba(69, 61, 53, 0.05));
 }
 
 .quadrant {
@@ -108,22 +110,21 @@
   --grad: linear-gradient(140deg, #577863 0%, #4E715D 55%, #3D604E 100%);
   --tile-color: #FFFDF9;
   --copy-left: 35%;
-  --copy-top: 9%;
-  --copy-width: 59%;
-  --icon-indent: 15%;
+  --copy-top: 13%;
+  --copy-width: 60%;
+  --icon-indent: 18%;
 }
 .bottomRight {
   --mask-file: url('/assets/saigon-pearl-purrs/rescue-heart/heart-bottom-right.svg');
   --grad: linear-gradient(145deg, #8B6757 0%, #80604F 55%, #715345 100%);
   --tile-color: #FFFDF9;
   --copy-left: 13%;
-  --copy-top: 14%;
-  --copy-width: 66%;
-  --icon-indent: 29%;
+  --copy-top: 13%;
+  --copy-width: 60%;
+  --icon-indent: 26%;
 }
 
 .shapeStack,
-.shapeShadow,
 .shapeEdge,
 .shapeFill,
 .shapeHighlight {
@@ -132,7 +133,6 @@
   pointer-events: none;
 }
 
-.shapeShadow,
 .shapeEdge,
 .shapeFill,
 .shapeHighlight {
@@ -146,14 +146,10 @@
   mask-repeat: no-repeat;
 }
 
-.shapeShadow {
-  background: rgba(69, 61, 53, .32);
-  transform: translate(6px, 9px) scale(1.01);
-  filter: blur(10px);
-  opacity: .52;
-  z-index: 0;
+.shapeEdge {
+  background: var(--quadrant-border);
+  z-index: 1;
 }
-.shapeEdge { background: #FFFDF9; z-index: 1; }
 .shapeFill {
   inset: 3px;
   background: var(--grad);
@@ -225,16 +221,16 @@
   .quadrant:hover .quadrantIcon { transform: translateY(-2px) scale(1.08); }
 }
 
-/* The ORIGINAL supplied '3.svg' heart, rendered as five concentric masks. */
+/* The ORIGINAL supplied '3.svg' heart, rendered as concentric masks with backing halo. */
 .centerHeart {
   position: absolute;
   z-index: 6;
   left: 50%;
-  top: 48.5%;
-  width: 29.5%;
+  top: 46.5%;
+  width: 30.5%;
   aspect-ratio: 2337 / 2062;
   transform: translate(-50%, -50%);
-  filter: drop-shadow(0 8px 8px rgba(69,61,53,.28));
+  filter: drop-shadow(0 6px 14px rgba(69,61,53,.18));
   pointer-events: none;
 }
 .heartLayer {
@@ -250,6 +246,11 @@
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
   transform-origin: center center;
+}
+.heartBacking {
+  background: #FFFDF9;
+  transform: scale(1.08);
+  filter: drop-shadow(0 2px 6px rgba(69,61,53,.08));
 }
 .heartOuter { background: #9B7862; transform: scale(1); }
 .heartRingOne { background: #FFFDF9; transform: scale(.91); }
@@ -388,11 +389,11 @@
 @media (prefers-reduced-motion: no-preference) {
   .motionFrame[data-motion='waiting'] .quadrant {
     opacity: 0;
-    transform: translateY(19px) scale(.98);
+    transform: translateY(16px) scale(.98);
   }
   .motionFrame[data-motion='waiting'] .centerHeart {
     opacity: 0;
-    transform: translate(-50%, -42%) scale(.98);
+    transform: translate(-50%, -50%) scale(.92);
   }
   .motionFrame[data-motion='visible'] .quadrant {
     opacity: 1;
@@ -401,7 +402,7 @@
   }
   .motionFrame[data-motion='visible'] .centerHeart {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1);
     transition: opacity .7s ease .25s, transform .7s cubic-bezier(.15,.72,.2,1) .25s;
   }
 }

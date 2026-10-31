@@ -42,7 +42,6 @@ export function RescueHeartDiagram({ locale }: { locale: Locale }) {
                   style={{ '--step-index': index } as CSSProperties}
                 >
                   <div className={styles.shapeStack} aria-hidden="true">
-                    <span className={styles.shapeShadow} />
                     <span className={styles.shapeEdge} />
                     <span className={styles.shapeFill} />
                     <span className={styles.shapeHighlight} />
@@ -57,6 +56,7 @@ export function RescueHeartDiagram({ locale }: { locale: Locale }) {
             })}
 
             <div className={styles.centerHeart} aria-label={copy.center}>
+              <span className={`${styles.heartLayer} ${styles.heartBacking}`} aria-hidden="true" />
               <span className={`${styles.heartLayer} ${styles.heartOuter}`} aria-hidden="true" />
               <span className={`${styles.heartLayer} ${styles.heartRingOne}`} aria-hidden="true" />
               <span className={`${styles.heartLayer} ${styles.heartRingTwo}`} aria-hidden="true" />
