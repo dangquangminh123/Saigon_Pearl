@@ -1461,8 +1461,8 @@ img { display: block; }
 /* 2b. Medium Tablets (<= 991px) */
 @media (max-width: 991px) {
   .two-column {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
   }
   .two-column .photo-large {
     order: -1;
@@ -1474,11 +1474,15 @@ img { display: block; }
     height: 120px !important;
   }
   .contact-layout {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
   }
   .contact-aside {
     margin-top: 14px;
+  }
+  .value-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
   }
   .content-heading {
     font-size: clamp(24px, 3.5vw, 32px);
@@ -1866,7 +1870,11 @@ img { display: block; }
     border-radius: 12px !important;
   }
 
-  /* Form row stacks on mobile */
+  /* Contact Layout & Form row stacks on mobile */
+  .contact-layout {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
   .form-row {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
@@ -1982,6 +1990,10 @@ img { display: block; }
   .principle-list li {
     font-size: 12px !important;
     line-height: 1.5 !important;
+  }
+  .contact-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
   .contact-form-card {
     padding: 15px 12px !important;

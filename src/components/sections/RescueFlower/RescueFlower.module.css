@@ -17,14 +17,14 @@
   --badge-mask: url('/assets/saigon-pearl-purrs/flower-step-leaf.svg');
   --center-mask: url('/assets/saigon-pearl-purrs/flower-center-ring.svg');
 
-  --stage-w: 1120px;
-  --stage-h: 1080px;
+  --stage-w: 1160px;
+  --stage-h: 1120px;
   --petal-w: 330px;
   --petal-h: 396px;
   --petal-r: 272px;
-  --text-r: 312px;
-  --icon-r: 204px;
-  --badge-r: 476px;
+  --text-r: 300px;
+  --icon-r: 198px;
+  --badge-r: 486px;
   --badge-w: 104px;
   --center-w: 276px;
   --copy-w: 170px;
@@ -129,7 +129,7 @@
   position: absolute; left: 50%;
   transform: translate(-50%, -50%) rotate(var(--petal-counter));
 }
-.textAnchor { top: calc(50% - var(--text-r)); z-index: 7; pointer-events: auto; }
+.textAnchor { top: calc(50% - var(--text-r)); z-index: 12; pointer-events: auto; }
 .textLink {
   display: block; width: var(--copy-w); max-width: 100%;
   text-align: center; text-decoration: none;
@@ -166,7 +166,7 @@
   --leaf-angle: 12deg;
   top: calc(50% - var(--badge-r));
   width: var(--badge-w); height: var(--badge-w);
-  z-index: 10;
+  z-index: 8;
   filter: drop-shadow(4px 7px 7px rgba(69,61,53,.22));
   transform: translate(-50%, -50%) rotate(var(--petal-counter)) rotate(var(--leaf-angle));
 }
