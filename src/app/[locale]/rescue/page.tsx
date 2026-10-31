@@ -7,6 +7,7 @@ import { isLocale, routeFor, type Locale } from '@/lib/i18n';
 import { pageMetadata } from '@/lib/site';
 import { rescueData, guideArticles } from '@/data/rescue-guide';
 import { RescueCatalog } from './_components/RescueCatalog';
+import { RescueHeartDiagram } from './_components/RescueHeartDiagram';
 import styles from './rescue.module.css';
 
 type Props = { params: Promise<{ locale: string }> };
@@ -110,6 +111,9 @@ export default async function RescuePage({ params }: Props) {
           </div>
         </section>
       </main>
+
+      {/* 06. Standalone SVG heart at the end of /vi/rescue & /en/rescue */}
+      <RescueHeartDiagram locale={locale} />
     </div>
   );
 }

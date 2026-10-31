@@ -1,0 +1,414 @@
+/*
+ * SAIGON PEARL PURRS · RESCUE HEART SHAPE-LAYER DIAGRAM
+ * Shape mapping from the supplied Illustrator vectors:
+ *   1B=top left, 1A=top right, 2A=bottom left, 2B=bottom right, 3=center.
+ * No rectangle silhouettes or CSS border-radius substitutes are used for SVG shapes.
+ * The section stands ALONE at the bottom of /[locale]/rescue, outside the existing container.
+ */
+.section,
+.section * { box-sizing: border-box; }
+
+.section {
+  --cream: #F7F4EE;
+  --sage: #DCE5D7;
+  --earth: #9B7862;
+  --brown: #453D35;
+  --ivory: #FFFDF9;
+  --heart-file: url('/assets/saigon-pearl-purrs/rescue-heart/heart-center.svg');
+  --figure-width: 750px;
+  --seam: 5px;
+
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  clear: both;
+  margin: 0 auto;
+  padding: 80px 20px 92px;
+  background: var(--cream);
+  color: var(--brown);
+  font-family: var(--font-be-vietnam), system-ui, sans-serif;
+  isolation: isolate;
+  overflow-x: clip;
+}
+
+.inner {
+  display: block;
+  max-width: 1020px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.motionFrame {
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* One centered stage; 2x2 parts form the original four-segment heart. */
+.diagram {
+  width: min(100%, var(--figure-width));
+  height: auto;
+  aspect-ratio: 1.095;
+  margin-inline: auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 46fr) minmax(0, 54fr);
+  gap: var(--seam);
+  isolation: isolate;
+}
+
+.quadrant {
+  --mask-file: none;
+  --tile-color: var(--brown);
+  --grad: linear-gradient(145deg, var(--sage), var(--earth));
+  --copy-left: 19%;
+  --copy-top: 17%;
+  --copy-width: 70%;
+  --icon-indent: 28%;
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  min-height: 0;
+  color: var(--tile-color);
+  transition: transform .38s cubic-bezier(.2,.8,.2,1), filter .38s ease;
+  transform-origin: 50% 50%;
+  will-change: auto;
+}
+
+.topLeft {
+  --mask-file: url('/assets/saigon-pearl-purrs/rescue-heart/heart-top-left.svg');
+  --grad: linear-gradient(135deg, #E8D0B4 0%, #DFC1A4 64%, #CFAD8F 100%);
+  --copy-left: 25%;
+  --copy-top: 17%;
+  --copy-width: 65%;
+  --icon-indent: 22%;
+}
+.topRight {
+  --mask-file: url('/assets/saigon-pearl-purrs/rescue-heart/heart-top-right.svg');
+  --grad: linear-gradient(145deg, #DCE5D7 0%, #B9CFB8 55%, #97B49E 100%);
+  --copy-left: 15%;
+  --copy-top: 17%;
+  --copy-width: 66%;
+  --icon-indent: 33%;
+}
+.bottomLeft {
+  --mask-file: url('/assets/saigon-pearl-purrs/rescue-heart/heart-bottom-left.svg');
+  --grad: linear-gradient(140deg, #577863 0%, #4E715D 55%, #3D604E 100%);
+  --tile-color: #FFFDF9;
+  --copy-left: 35%;
+  --copy-top: 9%;
+  --copy-width: 59%;
+  --icon-indent: 15%;
+}
+.bottomRight {
+  --mask-file: url('/assets/saigon-pearl-purrs/rescue-heart/heart-bottom-right.svg');
+  --grad: linear-gradient(145deg, #8B6757 0%, #80604F 55%, #715345 100%);
+  --tile-color: #FFFDF9;
+  --copy-left: 13%;
+  --copy-top: 14%;
+  --copy-width: 66%;
+  --icon-indent: 29%;
+}
+
+.shapeStack,
+.shapeShadow,
+.shapeEdge,
+.shapeFill,
+.shapeHighlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.shapeShadow,
+.shapeEdge,
+.shapeFill,
+.shapeHighlight {
+  -webkit-mask-image: var(--mask-file);
+  mask-image: var(--mask-file);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.shapeShadow {
+  background: rgba(69, 61, 53, .32);
+  transform: translate(6px, 9px) scale(1.01);
+  filter: blur(10px);
+  opacity: .52;
+  z-index: 0;
+}
+.shapeEdge { background: #FFFDF9; z-index: 1; }
+.shapeFill {
+  inset: 3px;
+  background: var(--grad);
+  z-index: 2;
+}
+.shapeHighlight {
+  inset: 3px;
+  background: linear-gradient(120deg, rgba(255,255,255,.5), transparent 34%, rgba(255,255,255,.08) 56%, transparent 100%);
+  opacity: .37;
+  z-index: 3;
+  transition: opacity .4s ease;
+}
+.shapeHighlight::after {
+  content: '';
+  position: absolute;
+  inset: -35%;
+  background: linear-gradient(110deg, transparent 28%, rgba(255,255,255,.43) 46%, transparent 61%);
+  opacity: 0;
+  transform: translateX(-90%) skewX(-14deg);
+  transition: transform .7s cubic-bezier(.2,.7,.3,1), opacity .3s ease;
+}
+
+.quadrantContent {
+  position: absolute;
+  z-index: 4;
+  top: var(--copy-top);
+  left: var(--copy-left);
+  width: var(--copy-width);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  pointer-events: none;
+}
+.quadrantIcon {
+  width: clamp(29px, 4.2vw, 42px);
+  height: clamp(29px, 4.2vw, 42px);
+  flex: 0 0 auto;
+  margin-left: var(--icon-indent);
+  margin-bottom: clamp(15px, 2vw, 24px);
+  color: currentColor;
+  filter: drop-shadow(0 2px 2px rgba(69,61,53,.10));
+  transition: transform .38s cubic-bezier(.22,.8,.22,1);
+}
+.quadrantContent h3 {
+  font-family: var(--font-be-vietnam), system-ui, sans-serif;
+  font-size: clamp(16px, 2.1vw, 20px);
+  line-height: 1.2;
+  letter-spacing: -.025em;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: inherit;
+  text-wrap: balance;
+}
+.quadrantContent p {
+  margin: 0;
+  font-size: clamp(11.4px, 1.3vw, 13px);
+  line-height: 1.52;
+  font-weight: 500;
+  color: inherit;
+  text-wrap: pretty;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .quadrant:hover { transform: translateY(-4px) scale(1.014); z-index: 2; }
+  .quadrant:hover .shapeHighlight { opacity: .75; }
+  .quadrant:hover .shapeHighlight::after { opacity: .8; transform: translateX(90%) skewX(-14deg); }
+  .quadrant:hover .quadrantIcon { transform: translateY(-2px) scale(1.08); }
+}
+
+/* The ORIGINAL supplied '3.svg' heart, rendered as five concentric masks. */
+.centerHeart {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  top: 48.5%;
+  width: 29.5%;
+  aspect-ratio: 2337 / 2062;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 8px 8px rgba(69,61,53,.28));
+  pointer-events: none;
+}
+.heartLayer {
+  position: absolute;
+  inset: 0;
+  background: var(--earth);
+  -webkit-mask-image: var(--heart-file);
+  mask-image: var(--heart-file);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  transform-origin: center center;
+}
+.heartOuter { background: #9B7862; transform: scale(1); }
+.heartRingOne { background: #FFFDF9; transform: scale(.91); }
+.heartRingTwo { background: #9B7862; transform: scale(.82); }
+.heartRingThree { background: #FFFDF9; transform: scale(.73); }
+.heartCore { background: #795B4E; transform: scale(.64); }
+.heartCopy {
+  position: absolute;
+  z-index: 5;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 3px;
+  width: 59%;
+  color: #FFFDF9;
+}
+.heartIcon { width: 20px; height: 20px; }
+.heartCopy strong {
+  font-size: clamp(10px, 1.5vw, 14px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.23;
+  text-wrap: balance;
+}
+.heartCopy small { font-size: clamp(6px, .85vw, 9px); line-height: 1.25; font-weight: 600; }
+
+/* Full explanations are below the diagram ONLY at small viewport sizes. */
+.mobileDetails { display: none; }
+
+/* ---------------------------- RESPONSIVE ---------------------------- */
+@media (min-width: 1400px) {
+  .section { padding-block: 88px 104px; }
+  .diagram { --figure-width: 770px; }
+}
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .diagram { --figure-width: 730px; }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .section { padding-block: 72px 90px; }
+  .diagram { --figure-width: 695px; }
+  .quadrantIcon { margin-bottom: 15px; }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .section { padding-block: 65px 76px; }
+  .diagram { --figure-width: 660px; --seam: 4px; }
+  .quadrantIcon { width: 32px; height: 32px; margin-bottom: 13px; }
+  .quadrantContent h3 { font-size: 16px; }
+  .quadrantContent p { font-size: 11.5px; }
+}
+@media (min-width: 640px) and (max-width: 767.98px) {
+  .section { padding-block: 55px 74px; }
+  .diagram { --figure-width: 610px; --seam: 4px; }
+  .quadrantIcon { width: 29px; height: 29px; margin-bottom: 11px; }
+  .quadrantContent h3 { font-size: 14px; margin-bottom: 5px; }
+  .quadrantContent p { font-size: 10.4px; line-height: 1.38; }
+}
+@media (max-width: 639.98px) {
+  .section { padding: 45px 16px 65px; }
+  .diagram { --figure-width: 520px; --seam: 3px; }
+  .quadrantContent p { display: none; }
+  .quadrantContent { align-items: flex-start; }
+  .quadrantIcon { width: 26px; height: 26px; margin-bottom: 9px; }
+  .quadrantContent h3 { font-size: clamp(12px, 2.9vw, 16px); line-height: 1.17; margin: 0; }
+  .centerHeart { width: 31%; }
+  .heartIcon { width: 16px; height: 16px; }
+  .heartCopy strong { font-size: clamp(8px, 2.05vw, 12px); }
+  .heartCopy small { font-size: clamp(5px, 1.35vw, 8px); }
+  .mobileDetails {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+    margin: 22px auto 0;
+    max-width: 630px;
+  }
+  .detailRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    min-width: 0;
+    padding: 16px 13px;
+    background: #FFFDF9;
+    border: 1px solid rgba(155,120,98,.18);
+    border-radius: 14px;
+    box-shadow: 0 5px 14px rgba(69,61,53,.04);
+    color: #453D35;
+  }
+  .detailRow svg { color: #9B7862; width: 21px; height: 21px; flex: 0 0 auto; margin-top: 2px; }
+  .detailRow h3 { font-size: 14px; font-weight: 800; line-height: 1.35; margin: 0 0 5px; }
+  .detailRow p { font-size: 12px; line-height: 1.55; font-weight: 500; margin: 0; }
+}
+@media (max-width: 575.98px) {
+  .section { padding-inline: 13px; }
+  .diagram { --figure-width: 450px; }
+  .quadrantIcon { width: 24px; height: 24px; margin-bottom: 7px; }
+  .topLeft, .topRight { --copy-top: 20%; }
+  .bottomLeft, .bottomRight { --copy-top: 19%; }
+  .heartCopy small { display: none; }
+}
+@media (max-width: 412px) {
+  .section { padding: 36px 11px 58px; }
+  .diagram { --figure-width: 390px; --seam: 2px; }
+  .quadrantContent h3 { font-size: 12px; }
+  .quadrantIcon { width: 23px; height: 23px; margin-bottom: 6px; }
+  .topLeft { --copy-left: 25%; --copy-width: 64%; }
+  .topRight { --copy-left: 18%; --copy-width: 63%; }
+  .bottomLeft { --copy-left: 29%; --copy-width: 60%; }
+  .bottomRight { --copy-left: 14%; --copy-width: 62%; }
+  .centerHeart { width: 33%; }
+  .heartCopy strong { font-size: 8.5px; }
+  .heartIcon { width: 13px; height: 13px; }
+  .mobileDetails { grid-template-columns: 1fr; gap: 10px; margin-top: 22px; }
+  .detailRow { padding: 14px 15px; }
+  .detailRow p { font-size: 13px; }
+}
+@media (max-width: 379.98px) {
+  .diagram { --figure-width: 355px; }
+  .quadrantContent h3 { font-size: 11.5px; }
+  .quadrantIcon { width: 20px; height: 20px; margin-bottom: 5px; }
+  .bottomLeft, .bottomRight { --copy-top: 20%; }
+}
+@media (max-width: 359.98px) {
+  .section { padding-inline: 9px; }
+  .diagram { --figure-width: 320px; }
+  .quadrantContent h3 { font-size: 10.7px; }
+  .heartCopy strong { font-size: 7.5px; }
+  .heartIcon { width: 12px; height: 12px; }
+  .shapeFill, .shapeHighlight { inset: 2px; }
+}
+
+/* JS is only enhancement: server-rendered content stays visible by default. */
+@media (prefers-reduced-motion: no-preference) {
+  .motionFrame[data-motion='waiting'] .quadrant {
+    opacity: 0;
+    transform: translateY(19px) scale(.98);
+  }
+  .motionFrame[data-motion='waiting'] .centerHeart {
+    opacity: 0;
+    transform: translate(-50%, -42%) scale(.98);
+  }
+  .motionFrame[data-motion='visible'] .quadrant {
+    opacity: 1;
+    transition: opacity .65s ease, transform .65s cubic-bezier(.15,.72,.2,1);
+    transition-delay: calc(var(--step-index) * 90ms);
+  }
+  .motionFrame[data-motion='visible'] .centerHeart {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    transition: opacity .7s ease .25s, transform .7s cubic-bezier(.15,.72,.2,1) .25s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quadrant,
+  .quadrantIcon,
+  .shapeHighlight,
+  .shapeHighlight::after { transition: none !important; animation: none !important; }
+  .quadrant:hover { transform: none !important; }
+}
