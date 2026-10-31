@@ -4,7 +4,13 @@ out
 .env
 .env.local
 .env.production
+.env*.local
 .vercel
 *.tsbuildinfo
 .DS_Store
 npm-debug.log*
+*.pem
+*.key
+*.b64
+private-keys/
+
