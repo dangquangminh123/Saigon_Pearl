@@ -109,3 +109,4 @@ export function RescueFlower({ locale }: { locale: Locale }) {
     </section>
   );
 }
+

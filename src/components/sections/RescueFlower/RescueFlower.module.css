@@ -33,7 +33,7 @@
   --icon-size: 31px;
   --petal-hover: 1.016;
 
-  /* One full-width standalone row at the end of the Adoption page. */
+  /* This section occupies its own full-width row at the END of /adopt. */
   display: block;
   width: 100%;
   clear: both;
@@ -355,3 +355,4 @@
     animation: none !important; transition: none !important;
   }
 }
+
