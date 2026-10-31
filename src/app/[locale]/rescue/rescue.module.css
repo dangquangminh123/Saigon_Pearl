@@ -23,7 +23,7 @@
 .page h2,
 .page h3,
 .page blockquote {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   letter-spacing: -0.02em;
 }
 
@@ -489,7 +489,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 72px 20px 24px;
-  font-family: Georgia, serif;
+  font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 18px;
   font-weight: 700;
   line-height: 1.4;
@@ -512,7 +512,7 @@
   border-radius: 50%;
   background: var(--color-sage);
   color: var(--color-dark);
-  font-family: Arial, sans-serif;
+  font-family: var(--font-be-vietnam), Arial, sans-serif;
   font-size: 22px;
   font-weight: 700;
   line-height: 36px;
