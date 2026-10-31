@@ -33,13 +33,17 @@
   --icon-size: 31px;
   --petal-hover: 1.016;
 
+  /* One full-width standalone row at the end of the Adoption page. */
+  display: block;
+  width: 100%;
+  clear: both;
   padding: 80px 16px 85px;
   background: var(--sp-cream);
   color: var(--sp-brown);
   isolation: isolate;
   overflow: clip;
 }
-.inner { max-width: 1240px; margin: 0 auto; }
+.inner { width: 100%; max-width: 1240px; margin-inline: auto; }
 .heading { text-align: center; max-width: 830px; margin: 0 auto 12px; }
 .eyebrow {
   color: var(--sp-earth); font-size: 12px; font-weight: 800;
@@ -52,12 +56,13 @@
   color: var(--sp-brown);
 }
 .intro { font-size: 15px; line-height: 1.75; max-width: 740px; margin: 15px auto 0; color: #62594F; }
-.flower { width: 100%; }
+.flower { display: block; width: 100%; margin-inline: auto; }
 .stage {
   position: relative;
   width: min(100%, var(--stage-w));
+  max-width: 100%;
   height: var(--stage-h);
-  margin: 0 auto;
+  margin-inline: auto;
   isolation: isolate;
 }
 .petals { position: absolute; inset: 0; z-index: 1; }

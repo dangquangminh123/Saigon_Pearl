@@ -10,7 +10,6 @@ import { cats } from '@/data/cats';
 import { CatCard } from '@/components/CatCard';
 import { ButtonLink, SectionIntro } from '@/components/Ui';
 import { RescueCareIcon, FindHomeIcon, CommunityIcon, SupportHandsIcon } from '@/components/PillarIcons';
-import { RescueFlower } from '@/components/sections/RescueFlower/RescueFlower';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -178,8 +177,6 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      {/* Community rescue flower: eight ways to help community cats */}
-      <RescueFlower locale={locale} />
 
       {/* 5. Impact Counter Bar */}
       <section className="impact-section">

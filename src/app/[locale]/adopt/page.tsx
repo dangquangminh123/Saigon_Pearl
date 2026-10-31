@@ -5,6 +5,7 @@ import { pageMetadata } from '@/lib/site';
 import { getAdoptContent } from '@/data/adopt-services';
 import { AdoptServicesCatalog } from './_components/AdoptServicesCatalog';
 import styles from './adopt.module.css';
+import { RescueFlower } from '@/components/sections/RescueFlower/RescueFlower';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -56,6 +57,9 @@ export default async function AdoptPage({ params }: Props) {
           2. 8-CARD SERVICES CATALOG (IMAGE-BOX-STYLE-2) + SUBSCRIBE BANNER
           =================================================================== */}
       <AdoptServicesCatalog content={content} locale={locale} />
+
+      {/* Eight-petal SVG community infographic — a separate centered full-width section at the END of Adoption. */}
+      <RescueFlower locale={locale} />
     </div>
   );
 }
