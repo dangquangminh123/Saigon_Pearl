@@ -72,8 +72,15 @@
   background:linear-gradient(115deg,transparent 22%,rgba(255,255,255,.33) 46%,transparent 66%);
   transform:translateX(-125%) skewX(-12deg);
 }
-/* ORIGINAL shape 2 (not a hand-drawn approximation!):
- * 2 mirrored number leaves per group, the four groups rotated 0/90/180/270.
+/* ORIGINAL shape 2 (never replace this SVG with a CSS approximation):
+ * Four mirrored pairs are rotated at 0 / 90 / 180 / 270 degrees.
+ * Every consecutive pair (01-02, 02-03, ..., 08-01) must TOUCH,
+ * not just alternate pairs. At width 12.75% the same-orbit pairs
+ * are separated by ~25px in the 1200x1200 SVG coordinate system.
+ * The calibrated 14.05% leaf width yields a small anti-alias-safe
+ * overlap at ALL EIGHT seams, while anchoring the exterior leaf edges
+ * at left/right 36.25% so the colored outer petals remain aligned.
+ * Keep height, top, mirror, rotations, and diamond placement unchanged.
  */
 .lenses { z-index:3;width:100%;height:100%; }
 .lensOrbit {
@@ -82,7 +89,7 @@
 }
 .innerLeaf {
   position:absolute;top:21.083333%;
-  width:12.75%;height:23.666667%;
+  width:14.05%;height:23.666667%;
   display:block;background:var(--ivory);
   -webkit-mask-image:var(--lens-svg);mask-image:var(--lens-svg);
   -webkit-mask-position:center;mask-position:center;
