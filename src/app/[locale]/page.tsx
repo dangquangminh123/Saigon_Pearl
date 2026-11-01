@@ -10,6 +10,7 @@ import { cats } from '@/data/cats';
 import { CatCard } from '@/components/CatCard';
 import { ButtonLink, SectionIntro } from '@/components/Ui';
 import { RescueCareIcon, FindHomeIcon, CommunityIcon, SupportHandsIcon } from '@/components/PillarIcons';
+import { HomeCommunityWheel } from '@/components/sections/HomeCommunityWheel/HomeCommunityWheel';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -264,6 +265,9 @@ export default async function HomePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Independent 8-petal community wheel — full-width section centered just before footer */}
+      <HomeCommunityWheel locale={locale} />
     </>
   );
 }

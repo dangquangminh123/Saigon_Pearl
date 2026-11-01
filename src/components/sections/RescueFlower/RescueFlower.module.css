@@ -13,9 +13,9 @@
   --sp-earth: #9B7862;
   --sp-brown: #453D35;
   --sp-white: #FFFDF9;
-  --petal-mask: url('/assets/saigon-pearl-purrs/flower-petal.svg');
-  --badge-mask: url('/assets/saigon-pearl-purrs/flower-step-leaf.svg');
-  --center-mask: url('/assets/saigon-pearl-purrs/flower-center-ring.svg');
+  --petal-mask: url('/assets/saigon-pearl-purrs/adoption-rescue-flower/flower-petal.svg');
+  --badge-mask: url('/assets/saigon-pearl-purrs/adoption-rescue-flower/flower-step-leaf.svg');
+  --center-mask: url('/assets/saigon-pearl-purrs/adoption-rescue-flower/flower-center-ring.svg');
 
   --stage-w: 1160px;
   --stage-h: 1120px;
