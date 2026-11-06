@@ -31,7 +31,14 @@ export function VerifiedDonationQR({ locale }: { locale: Locale }) {
         return (await res.json()) as Data;
       })
       .then((data) => {
-        if (!data.ok || !data.qrDataUrl.startsWith('data:image/png;base64,')) {
+        if (
+          !data.ok ||
+          typeof data.qrDataUrl !== 'string' ||
+          !/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(data.qrDataUrl) ||
+          typeof data.bankCode !== 'string' ||
+          typeof data.accountNumber !== 'string' ||
+          typeof data.accountHolder !== 'string'
+        ) {
           throw new Error('Invalid QR data');
         }
         setState({ status: 'ready', data });

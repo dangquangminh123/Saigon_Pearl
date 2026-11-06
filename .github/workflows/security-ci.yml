@@ -1,0 +1,64 @@
+name: Security & Quality CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-build:
+    name: Typecheck, i18n, Security Gates & Build
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SITE_URL: https://saigonpearlpurrs.example
+      DONATION_ENABLED: 'false'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies cleanly
+        run: npm ci
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Verify i18n dictionaries
+        run: npm run verify:i18n
+
+      - name: Run TypeScript typecheck
+        run: npm run typecheck
+
+      - name: Run static & cryptographic security checks
+        run: npm run verify:security
+
+      - name: Build production bundle
+        run: npm run build
+
+  codeql:
+    name: CodeQL SAST Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3

@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Saigon Pearl Purrs Security API",
+    "version": "1.0.0",
+    "description": "Fail-closed Ed25519 + SHA-256 verified donation QR endpoint."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local verification server"
+    }
+  ],
+  "paths": {
+    "/api/verified-donation": {
+      "get": {
+        "operationId": "getVerifiedDonationQr",
+        "summary": "Retrieve cryptographically verified donation QR and bank details",
+        "responses": {
+          "200": {
+            "description": "Cryptographically verified donation QR payload",
+            "headers": {
+              "Cache-Control": { "schema": { "type": "string" } },
+              "X-Content-Type-Options": { "schema": { "type": "string", "enum": ["nosniff"] } },
+              "X-Frame-Options": { "schema": { "type": "string", "enum": ["DENY"] } },
+              "Content-Security-Policy": { "schema": { "type": "string" } }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VerifiedDonationSuccess" }
+              }
+            }
+          },
+          "400": {
+            "description": "Rejected unexpected query parameters or oversized URL",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DonationErrorResponse" }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DonationErrorResponse" }
+              }
+            }
+          },
+          "503": {
+            "description": "Fail-closed locked state (disabled, unverified, or tampered)",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DonationErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "VerifiedDonationSuccess": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ok", "bankCode", "accountNumber", "accountHolder", "qrDataUrl"],
+        "properties": {
+          "ok": { "type": "boolean", "enum": [true] },
+          "bankCode": { "type": "string", "pattern": "^[A-Z0-9]{2,16}$" },
+          "accountNumber": { "type": "string", "pattern": "^[0-9A-Z]{6,34}$" },
+          "accountHolder": { "type": "string", "minLength": 3, "maxLength": 100 },
+          "qrDataUrl": { "type": "string", "pattern": "^data:image/png;base64,[A-Za-z0-9+/=]+$" }
+        }
+      },
+      "DonationErrorResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ok", "error", "message"],
+        "properties": {
+          "ok": { "type": "boolean", "enum": [false] },
+          "error": {
+            "type": "string",
+            "enum": [
+              "DONATION_TEMPORARILY_LOCKED",
+              "METHOD_NOT_ALLOWED",
+              "INVALID_REQUEST_PARAMETERS",
+              "RATE_LIMIT_EXCEEDED"
+            ]
+          },
+          "message": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
+

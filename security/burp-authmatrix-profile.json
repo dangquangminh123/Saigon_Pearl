@@ -1,0 +1,138 @@
+{
+  "tool": "Burp Suite + AuthMatrix Security Verification Profile",
+  "project": "Saigon Pearl Purrs (Next.js 16)",
+  "version": "1.0.0",
+  "roles": [
+    {
+      "id": "anonymous_user",
+      "name": "Anonymous Public Visitor",
+      "headers": {
+        "Accept": "text/html,application/json"
+      }
+    },
+    {
+      "id": "forged_admin_headers",
+      "name": "Privilege Escalation / Header Spoofing Attacker",
+      "headers": {
+        "X-Forwarded-User": "admin",
+        "X-Admin-Bypass": "true",
+        "Authorization": "Bearer forged.jwt.token",
+        "X-Original-URL": "/api/verified-donation"
+      }
+    },
+    {
+      "id": "cross_origin_attacker",
+      "name": "Cross-Origin / Framing / CSRF Attacker",
+      "headers": {
+        "Origin": "https://evil-attacker.example",
+        "Referer": "https://evil-attacker.example/phishing"
+      }
+    }
+  ],
+  "matrix": [
+    {
+      "name": "Vietnamese Home Page (SSR + Nonce CSP)",
+      "method": "GET",
+      "path": "/vi",
+      "expectedStatus": [200],
+      "requiredHeaders": {
+        "content-security-policy": "script-src 'self' 'nonce-",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "cross-origin-opener-policy": "same-origin",
+        "cross-origin-resource-policy": "same-origin"
+      },
+      "forbiddenCspSubstrings": [
+        "img-src 'self' data: https:",
+        "fonts.gstatic.com"
+      ]
+    },
+    {
+      "name": "English Home Page (SSR + Nonce CSP)",
+      "method": "GET",
+      "path": "/en",
+      "expectedStatus": [200],
+      "requiredHeaders": {
+        "content-security-policy": "script-src 'self' 'nonce-",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      }
+    },
+    {
+      "name": "Adoption Page (Honest Local Form State)",
+      "method": "GET",
+      "path": "/vi/adopt",
+      "expectedStatus": [200],
+      "requiredHeaders": {
+        "content-security-policy": "script-src 'self' 'nonce-",
+        "x-frame-options": "DENY"
+      }
+    },
+    {
+      "name": "News Article Page (JSON-LD with Nonce & Escaped <)",
+      "method": "GET",
+      "path": "/vi/news/prepare-for-adoption",
+      "expectedStatus": [200],
+      "requiredHeaders": {
+        "content-security-policy": "script-src 'self' 'nonce-"
+      }
+    },
+    {
+      "name": "Donation API — Fail-Closed GET when Disabled/Demo",
+      "method": "GET",
+      "path": "/api/verified-donation",
+      "expectedStatus": [503],
+      "requiredHeaders": {
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'none'"
+      },
+      "expectedJson": {
+        "ok": false,
+        "error": "DONATION_TEMPORARILY_LOCKED"
+      }
+    },
+    {
+      "name": "Donation API — Reject Query Parameter Injection",
+      "method": "GET",
+      "path": "/api/verified-donation?accountNumber=11111111&DONATION_ENABLED=true",
+      "expectedStatus": [400],
+      "expectedJson": {
+        "ok": false,
+        "error": "INVALID_REQUEST_PARAMETERS"
+      }
+    },
+    {
+      "name": "Donation API — Block POST Method Tampering",
+      "method": "POST",
+      "path": "/api/verified-donation",
+      "expectedStatus": [405],
+      "expectedJson": {
+        "ok": false,
+        "error": "METHOD_NOT_ALLOWED"
+      }
+    },
+    {
+      "name": "Donation API — Block PUT Method Tampering",
+      "method": "PUT",
+      "path": "/api/verified-donation",
+      "expectedStatus": [405],
+      "expectedJson": {
+        "ok": false,
+        "error": "METHOD_NOT_ALLOWED"
+      }
+    },
+    {
+      "name": "Donation API — Block DELETE Method Tampering",
+      "method": "DELETE",
+      "path": "/api/verified-donation",
+      "expectedStatus": [405],
+      "expectedJson": {
+        "ok": false,
+        "error": "METHOD_NOT_ALLOWED"
+      }
+    }
+  ]
+}

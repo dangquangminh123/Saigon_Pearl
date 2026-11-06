@@ -1,0 +1,13 @@
+# Security-critical files require explicit review from project maintainers
+/next.config.ts @dangquangminh123
+/src/proxy.ts @dangquangminh123
+/src/app/api/** @dangquangminh123
+/src/components/VerifiedDonationQR.tsx @dangquangminh123
+/src/data/donation-manifest.json @dangquangminh123
+/private-assets/** @dangquangminh123
+/scripts/** @dangquangminh123
+/security/** @dangquangminh123
+/stackhawk.yml @dangquangminh123
+/.github/** @dangquangminh123
+/package.json @dangquangminh123
+/package-lock.json @dangquangminh123

@@ -1,5 +1,7 @@
 import '../globals.css';
 import { notFound } from 'next/navigation';
+import { headers } from 'next/headers';
+import { connection } from 'next/server';
 import type { ReactNode } from 'react';
 import type { Viewport } from 'next';
 import { locales, isLocale, type Locale } from '@/lib/i18n';
@@ -20,6 +22,8 @@ export default async function LocaleLayout({ children, params }: {
   children: ReactNode;
   params: Promise<{ locale: string }>;
 }) {
+  await connection();
+  const nonce = (await headers()).get('x-nonce') ?? undefined;
   const { locale: value } = await params;
   if (!isLocale(value)) notFound();
   const locale: Locale = value;
@@ -41,8 +45,15 @@ export default async function LocaleLayout({ children, params }: {
         <SiteHeader locale={locale} />
         <main id="main">{children}</main>
         <SiteFooter locale={locale} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
+        <script
+          nonce={nonce}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+          }}
+        />
       </body>
     </html>
   );
 }
+

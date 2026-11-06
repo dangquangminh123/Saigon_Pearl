@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "verify:i18n": "node scripts/verify-locales.cjs"
+    "verify:i18n": "node scripts/verify-locales.cjs",
+    "verify:security": "node scripts/verify-security.mjs",
+    "security:schemathesis": "schemathesis run security/openapi.json --url http://localhost:3000 -c status_code_conformance -c content_type_conformance -c response_headers_conformance -c response_schema_conformance -c negative_data_rejection"
   },
   "dependencies": {
     "next": "16.4.2",

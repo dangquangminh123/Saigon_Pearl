@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
+import { connection } from 'next/server';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, HeartHandshake, BookOpen } from 'lucide-react';
 import { articles } from '@/data/articles';
@@ -50,10 +52,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ArticlePage({ params }: Props) {
+  await connection();
+  const nonce = (await headers()).get('x-nonce') ?? undefined;
   const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
   const article = articles.find((item) => item.slug === slug);
   if (!article) notFound();
+
 
   const t = newsCopy[locale];
   const info = newsEditorial[slug];
@@ -182,6 +187,7 @@ export default async function ArticlePage({ params }: Props) {
       )}
 
       <script
+        nonce={nonce}
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),

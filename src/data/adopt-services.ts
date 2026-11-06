@@ -73,6 +73,9 @@ export interface AdoptContent {
     preferences: string[];
     submitButton: string;
     successMessage: string;
+    copyButton: string;
+    copiedLabel: string;
+    editButton: string;
     note: string;
   };
   faqSection: {
@@ -331,8 +334,8 @@ export const adoptServicesVi: AdoptContent = {
   },
   subscribe: {
     badge: 'Đăng Ký Tư Vấn',
-    title: 'Nhận Thông Báo Bé Mèo Cần Mái Ấm',
-    description: 'Để lại thông tin liên lạc, chúng tôi sẽ thông báo ngay khi có bé mèo mới được cứu hộ cần tìm mái ấm hoặc cần gia đình foster tạm thời tại Saigon Pearl.',
+    title: 'Soạn Thông Tin Đăng Ký Nhận Nuôi / Foster',
+    description: 'Nhập thông tin bên dưới để chuẩn bị nội dung đăng ký ngay trên trình duyệt của bạn trước khi gửi qua kênh liên hệ chính thức của nhóm.',
     namePlaceholder: 'Họ và tên của bạn',
     contactPlaceholder: 'Số điện thoại / Zalo hoặc Email',
     preferencePlaceholder: 'Nhu cầu của bạn (nhận nuôi / foster / cần tư vấn)',
@@ -342,9 +345,12 @@ export const adoptServicesVi: AdoptContent = {
       'Đăng ký làm gia đình foster tạm thời',
       'Cần tư vấn thêm về điều kiện nhận nuôi',
     ],
-    submitButton: 'Gửi Đăng Ký Nhận Thông Tin',
-    successMessage: 'Cảm ơn bạn! Thông tin đã được gửi tới đội ngũ cứu hộ Saigon Pearl. Chúng mình sẽ liên hệ với bạn sớm nhất!',
-    note: 'Dự án phi lợi nhuận 100%. Thông tin cá nhân của bạn được bảo mật tuyệt đối.',
+    submitButton: 'Soạn Nội Dung Đăng Ký',
+    successMessage: 'Bạn đã hoàn tất biểu mẫu trên trình duyệt; thông tin CHƯA được tự động gửi hoặc lưu lên máy chủ. Vui lòng sao chép nội dung bên dưới hoặc gửi qua ứng dụng email khi kênh tiếp nhận chính thức được công bố.',
+    copyButton: 'Sao chép nội dung đã tạo',
+    copiedLabel: 'Đã sao chép vào bộ nhớ tạm',
+    editButton: 'Chỉnh sửa lại thông tin',
+    note: 'Dự án phi lợi nhuận 100%. Thông tin bạn nhập chỉ dùng để soạn nội dung ngay trên trình duyệt của bạn; website hiện không tự động thu thập hay lưu trữ dữ liệu cá nhân trên máy chủ.',
   },
   faqSection: {
     eyebrow: 'Hỏi đáp nhanh',
@@ -619,8 +625,8 @@ export const adoptServicesEn: AdoptContent = {
   },
   subscribe: {
     badge: 'Adoption Inquiry',
-    title: 'Get Notified When a New Cat Needs a Home',
-    description: 'Leave your contact details to be the first to know whenever a newly rescued cat or foster opportunity arises in Saigon Pearl.',
+    title: 'Prepare Your Adoption / Foster Inquiry',
+    description: 'Fill in your details below to compose your adoption or foster inquiry locally in your browser before sending it through our official contact channel.',
     namePlaceholder: 'Your full name',
     contactPlaceholder: 'Phone number / WhatsApp or Email',
     preferencePlaceholder: 'Your interest (adoption / fostering / guidance)',
@@ -630,9 +636,12 @@ export const adoptServicesEn: AdoptContent = {
       'Register as a temporary foster family',
       'Need adoption consultation first',
     ],
-    submitButton: 'Submit Interest Form',
-    successMessage: 'Thank you! Your information has been sent to our Saigon Pearl rescue team. We will get in touch shortly!',
-    note: '100% non-profit. Your personal contact information is kept strictly confidential.',
+    submitButton: 'Prepare Inquiry Text',
+    successMessage: 'You have completed the form in your browser; your information has NOT been automatically sent or stored on a server. Please copy the prepared text below or send it via your email app once an official contact channel is published.',
+    copyButton: 'Copy prepared inquiry',
+    copiedLabel: 'Copied to clipboard',
+    editButton: 'Edit information',
+    note: '100% non-profit. Information you enter is used solely to compose text in your browser; this website does not automatically collect or store personal data on any server.',
   },
   faqSection: {
     eyebrow: 'FAQ',

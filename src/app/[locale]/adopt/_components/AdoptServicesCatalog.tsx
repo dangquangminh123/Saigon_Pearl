@@ -37,7 +37,9 @@ export function AdoptServicesCatalog({ content, locale }: Props) {
   const [fullName, setFullName] = useState('');
   const [contact, setContact] = useState('');
   const [preference, setPreference] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [preparedMessage, setPreparedMessage] = useState('');
+  const [copied, setCopied] = useState(false);
+  const configuredEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || '';
 
   // Filter items
   const filteredServices = activeTab === 'all'
@@ -63,8 +65,35 @@ export function AdoptServicesCatalog({ content, locale }: Props) {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!contact.trim()) return;
-    setIsSubmitted(true);
+    const cleanName = fullName.trim().slice(0, 100);
+    const cleanContact = contact.trim().slice(0, 160);
+    if (!cleanContact) return;
+
+    const chosenPref = preference || content.subscribe.preferences[0] || '';
+    const lines = [
+      `[Saigon Pearl Purrs — ${locale === 'vi' ? 'Đăng ký Nhận nuôi / Foster' : 'Adoption / Foster Inquiry'}]`,
+      `${locale === 'vi' ? 'Họ và tên' : 'Full Name'}: ${cleanName || (locale === 'vi' ? 'Chưa cung cấp' : 'Not provided')}`,
+      `${locale === 'vi' ? 'Liên hệ' : 'Contact'}: ${cleanContact}`,
+      `${locale === 'vi' ? 'Nguyện vọng' : 'Preference'}: ${chosenPref}`,
+    ];
+    const body = lines.join('\n');
+    setPreparedMessage(body);
+    setCopied(false);
+
+    if (configuredEmail) {
+      const subject = encodeURIComponent(`[Saigon Pearl Purrs] ${chosenPref}`);
+      window.location.href = `mailto:${configuredEmail}?subject=${subject}&body=${encodeURIComponent(body)}`;
+    }
+  };
+
+  const handleCopyPrepared = async () => {
+    if (!preparedMessage) return;
+    try {
+      await navigator.clipboard.writeText(preparedMessage);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
   };
 
   // Icon mapping
@@ -199,19 +228,48 @@ export function AdoptServicesCatalog({ content, locale }: Props) {
 
             {/* Right Column: Interactive Form */}
             <div className={styles.subscribeForm}>
-              {isSubmitted ? (
-                <div className={styles.formSuccess}>
-                  <CheckCircle2 size={38} style={{ margin: '0 auto 12px', display: 'block', color: '#3A5432' }} />
-                  <p>{content.subscribe.successMessage}</p>
+              {preparedMessage ? (
+                <div className={styles.formSuccess} role="status" aria-live="polite">
+                  <CheckCircle2 size={32} style={{ margin: '0 auto 10px', display: 'block', color: '#3A5432' }} />
+                  <p style={{ margin: '0 0 12px', fontSize: '14px' }}>{content.subscribe.successMessage}</p>
+                  <textarea
+                    className={styles.preparedTextarea}
+                    readOnly
+                    rows={5}
+                    value={preparedMessage}
+                    aria-label={content.subscribe.title}
+                  />
+                  <div className={styles.preparedActions}>
+                    <button
+                      type="button"
+                      className={styles.formSubmitBtn}
+                      onClick={handleCopyPrepared}
+                    >
+                      <span>{copied ? content.subscribe.copiedLabel : content.subscribe.copyButton}</span>
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.formSecondaryBtn}
+                      onClick={() => {
+                        setPreparedMessage('');
+                        setCopied(false);
+                      }}
+                    >
+                      <span>{content.subscribe.editButton}</span>
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit}>
                   <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
+                    <label htmlFor="adopt-fullname" className={styles.formLabel}>
                       {locale === 'vi' ? 'Họ và tên' : 'Full Name'}
                     </label>
                     <input
+                      id="adopt-fullname"
                       type="text"
+                      maxLength={100}
+                      autoComplete="name"
                       className={styles.formInput}
                       placeholder={content.subscribe.namePlaceholder}
                       value={fullName}
@@ -220,12 +278,15 @@ export function AdoptServicesCatalog({ content, locale }: Props) {
                   </div>
 
                   <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
+                    <label htmlFor="adopt-contact" className={styles.formLabel}>
                       {locale === 'vi' ? 'Số điện thoại / Zalo hoặc Email *' : 'Phone / WhatsApp or Email *'}
                     </label>
                     <input
+                      id="adopt-contact"
                       type="text"
                       required
+                      maxLength={160}
+                      autoComplete="email"
                       className={styles.formInput}
                       placeholder={content.subscribe.contactPlaceholder}
                       value={contact}
@@ -234,10 +295,11 @@ export function AdoptServicesCatalog({ content, locale }: Props) {
                   </div>
 
                   <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>
+                    <label htmlFor="adopt-preference" className={styles.formLabel}>
                       {locale === 'vi' ? 'Nguyện vọng của bạn' : 'Your Preference'}
                     </label>
                     <select
+                      id="adopt-preference"
                       className={styles.formSelect}
                       value={preference}
                       onChange={(e) => setPreference(e.target.value)}

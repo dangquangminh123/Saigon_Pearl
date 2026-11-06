@@ -1,0 +1,17 @@
+app:
+  applicationId: ${APP_ID:00000000-0000-0000-0000-000000000000}
+  env: ${APP_ENV:Development}
+  host: ${APP_HOST:http://localhost:3000}
+  openApiConf:
+    filePath: security/openapi.json
+  autoPolicy: true
+  antiCsrfParam: csrfToken
+
+hawk:
+  spider:
+    base: true
+    maxDurationMinutes: 3
+  scan:
+    maxDurationMinutes: 5
+    threads: 10
+  failureThreshold: medium

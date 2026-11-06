@@ -1,10 +1,8 @@
 node_modules
 .next
 out
-.env
-.env.local
-.env.production
-.env*.local
+.env*
+!.env.example
 .vercel
 *.tsbuildinfo
 .DS_Store
@@ -13,4 +11,7 @@ npm-debug.log*
 *.key
 *.b64
 private-keys/
+.schemathesis*
+hawk-*.log
+
 
