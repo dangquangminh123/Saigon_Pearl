@@ -4,30 +4,27 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { ArrowUpRight, ChevronLeft, ChevronRight, Film, Pause, Play, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Film, Sparkles } from 'lucide-react';
 import type { Locale } from '@/lib/i18n';
 import { routeFor } from '@/lib/i18n';
 import { STORY_SCENES } from './rescueStoryReel.data';
 import styles from './RescueStoryReel.module.css';
 
-const SCENE_DURATION_MS = 6500;
+const SCENE_DURATION_MS = 5200;
 
 export function RescueStoryReel({ locale }: { locale: Locale }) {
   const shouldReduce = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
+  // Silent background auto-advance timer (no visible loading/progress bars)
   useEffect(() => {
-    setIsPlaying(!shouldReduce);
-  }, [shouldReduce]);
-
-  useEffect(() => {
-    if (!isPlaying || shouldReduce) return;
-    const timer = window.setInterval(() => {
+    if (shouldReduce || isHovered) return;
+    const timer = window.setTimeout(() => {
       setActiveIndex((current) => (current + 1) % STORY_SCENES.length);
     }, SCENE_DURATION_MS);
-    return () => window.clearInterval(timer);
-  }, [isPlaying, shouldReduce]);
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, isHovered, shouldReduce]);
 
   const scene = STORY_SCENES[activeIndex] ?? STORY_SCENES[0];
   const words = scene.title[locale].split(' ');
@@ -37,6 +34,8 @@ export function RescueStoryReel({ locale }: { locale: Locale }) {
     <section
       className={styles.section}
       aria-label={isVi ? 'Thước phim chuyển động: Hành trình cứu hộ & nhận nuôi' : 'Motion Storyboard: Rescue & Adoption Journey'}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="container">
         <div className={styles.headerRow}>
@@ -51,16 +50,6 @@ export function RescueStoryReel({ locale }: { locale: Locale }) {
           </div>
 
           <div className={styles.controlsBar}>
-            <button
-              type="button"
-              className={styles.playToggle}
-              onClick={() => setIsPlaying((prev) => !prev)}
-              aria-pressed={isPlaying}
-              aria-label={isPlaying ? (isVi ? 'Tạm dừng tự động chuyển cảnh' : 'Pause playback') : (isVi ? 'Phát tự động chuyển cảnh' : 'Play scenes')}
-            >
-              {isPlaying ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}
-              <span>{isPlaying ? (isVi ? 'Tạm dừng' : 'Pause') : (isVi ? 'Phát tiếp' : 'Play')}</span>
-            </button>
             <div className={styles.arrowGroup}>
               <button
                 type="button"
@@ -84,22 +73,35 @@ export function RescueStoryReel({ locale }: { locale: Locale }) {
 
         <div className={styles.stage}>
           <div className={styles.layerMesh} aria-hidden="true">
-            <div className={styles.meshOrbPrimary} />
-            <div className={styles.meshOrbAccent} />
+            <motion.div
+              className={styles.meshOrbPrimary}
+              animate={shouldReduce ? undefined : { x: [0, 32, -16, 0], y: [0, -24, 18, 0], scale: [1, 1.08, 0.96, 1] }}
+              transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.div
+              className={styles.meshOrbAccent}
+              animate={shouldReduce ? undefined : { x: [0, -28, 20, 0], y: [0, 22, -18, 0], scale: [1, 0.94, 1.06, 1] }}
+              transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+            />
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
               key={`photo-${scene.id}`}
               className={styles.layerAsset}
-              initial={shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 1.01 }}
-              animate={shouldReduce ? { opacity: 1 } : { opacity: 1, scale: [1.01, 1.065], x: [0, -10], y: [0, -6] }}
-              exit={{ opacity: 0 }}
+              initial={shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 1.08, filter: 'blur(6px)' }}
+              animate={
+                shouldReduce
+                  ? { opacity: 1 }
+                  : { opacity: 1, scale: [1.06, 1.01], x: [8, -8], y: [4, -4], filter: 'blur(0px)' }
+              }
+              exit={shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 1.03, filter: 'blur(4px)' }}
               transition={{
-                opacity: { duration: 0.36, ease: [0.22, 1, 0.36, 1] },
-                scale: { duration: 6.4, ease: [0.22, 1, 0.36, 1] },
-                x: { duration: 6.4, ease: [0.22, 1, 0.36, 1] },
-                y: { duration: 6.4, ease: [0.22, 1, 0.36, 1] },
+                opacity: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+                filter: { duration: 0.48, ease: [0.22, 1, 0.36, 1] },
+                scale: { duration: 5.2, ease: [0.22, 1, 0.36, 1] },
+                x: { duration: 5.2, ease: [0.22, 1, 0.36, 1] },
+                y: { duration: 5.2, ease: [0.22, 1, 0.36, 1] },
               }}
             >
               <Image src={scene.image} alt={scene.imageAlt[locale]} fill sizes="(max-width: 900px) 94vw, 1180px" className={styles.assetImage} />
@@ -178,25 +180,18 @@ export function RescueStoryReel({ locale }: { locale: Locale }) {
                 role="tab"
                 aria-selected={active}
                 className={`${styles.scrubberTab} ${active ? styles.scrubberTabActive : ''}`}
-                onClick={() => {
-                  setActiveIndex(idx);
-                  setIsPlaying(false);
-                }}
+                onClick={() => setActiveIndex(idx)}
               >
+                {active && (
+                  <motion.span
+                    layoutId="storyReelActivePill"
+                    className={styles.scrubberActiveBg}
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                  />
+                )}
                 <div className={styles.scrubberTop}>
                   <span className={styles.scrubberStep}>{item.step}</span>
                   <span className={styles.scrubberTitle}>{item.tag[locale].split('•')[1]?.trim() ?? item.tag[locale]}</span>
-                </div>
-                <div className={styles.progressTrack} aria-hidden="true">
-                  {active && (
-                    <motion.div
-                      key={`bar-${item.id}-${isPlaying ? 'play' : 'pause'}`}
-                      className={styles.progressFill}
-                      initial={{ scaleX: isPlaying && !shouldReduce ? 0 : 1 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: isPlaying && !shouldReduce ? SCENE_DURATION_MS / 1000 : 0.2, ease: 'linear' }}
-                    />
-                  )}
                 </div>
               </button>
             );

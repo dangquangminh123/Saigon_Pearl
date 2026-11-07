@@ -2484,23 +2484,6 @@ body:has([data-page="community-article"]) .mobile-nav {
   pointer-events: none;
 }
 
-.reading-progress-track {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3.5px;
-  z-index: 120;
-  background: rgba(155, 120, 98, 0.12);
-  pointer-events: none;
-}
-.reading-progress-bar {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, var(--terracotta), var(--forest));
-  transform-origin: 0% 50%;
-}
-
 @media (scripting: none) {
   [data-motion-reveal] {
     opacity: 1 !important;

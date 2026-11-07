@@ -11,7 +11,7 @@ import { CatCard } from '@/components/CatCard';
 import { ButtonLink, SectionIntro } from '@/components/Ui';
 import { RescueCareIcon, FindHomeIcon, CommunityIcon, SupportHandsIcon } from '@/components/PillarIcons';
 import { HomeCommunityWheel } from '@/components/sections/HomeCommunityWheel/HomeCommunityWheel';
-import { EditorialReveal } from '@/components/motion/EditorialMotion';
+import { EditorialReveal, FloatingBadge } from '@/components/motion/EditorialMotion';
 import { RescueStoryReel } from '@/components/motion/RescueStoryReel';
 
 type Props = { params: Promise<{ locale: string }> };
@@ -55,40 +55,48 @@ export default async function HomePage({ params }: Props) {
 
         <div className="container hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow hero-eyebrow">{t.home.eyebrow}</p>
-            <h1 className="display-heading">
-              <span>{t.home.heroTitleA}</span>
-              <span>{t.home.heroTitleB}</span>
-              <span className="hero-title-highlight">
-                {t.home.heroTitleC}
-                <Heart size={26} fill="currentColor" className="hero-heart-inline" aria-hidden="true" />
-              </span>
-            </h1>
-            <p className="hero-description">{t.home.heroDesc}</p>
-            <div className="hero-buttons">
-              <ButtonLink
-                href={routeFor(locale, '/cats')}
-                variant="primary"
-                icon={<Heart size={16} fill="currentColor" />}
-              >
-                {t.home.heroPrimary}
-              </ButtonLink>
-              <ButtonLink href={routeFor(locale, '/get-involved')} variant="outline">
-                {t.home.heroSecondary}
-              </ButtonLink>
-            </div>
+            <EditorialReveal delay={0.02} y={18}>
+              <p className="eyebrow hero-eyebrow">{t.home.eyebrow}</p>
+            </EditorialReveal>
+            <EditorialReveal delay={0.08} y={24}>
+              <h1 className="display-heading">
+                <span>{t.home.heroTitleA}</span>
+                <span>{t.home.heroTitleB}</span>
+                <span className="hero-title-highlight">
+                  {t.home.heroTitleC}
+                  <Heart size={26} fill="currentColor" className="hero-heart-inline" aria-hidden="true" />
+                </span>
+              </h1>
+            </EditorialReveal>
+            <EditorialReveal delay={0.14} y={20}>
+              <p className="hero-description">{t.home.heroDesc}</p>
+            </EditorialReveal>
+            <EditorialReveal delay={0.2} y={18}>
+              <div className="hero-buttons">
+                <ButtonLink
+                  href={routeFor(locale, '/cats')}
+                  variant="primary"
+                  icon={<Heart size={16} fill="currentColor" />}
+                >
+                  {t.home.heroPrimary}
+                </ButtonLink>
+                <ButtonLink href={routeFor(locale, '/get-involved')} variant="outline">
+                  {t.home.heroSecondary}
+                </ButtonLink>
+              </div>
+            </EditorialReveal>
           </div>
         </div>
 
         {/* Editorial Badge on Hero Image */}
-        <div className="hero-cloud-badge" aria-hidden="true">
+        <FloatingBadge className="hero-cloud-badge">
           <span className="cloud-icon-wrap">
             <PawPrint size={18} strokeWidth={2} />
           </span>
           <p className="cloud-text">
             {t.home.heroStickerA} {t.home.heroStickerB} <strong>{t.home.heroStickerC}</strong>
           </p>
-        </div>
+        </FloatingBadge>
       </section>
 
       {/* 2. Four Pillars */}
@@ -98,18 +106,19 @@ export default async function HomePage({ params }: Props) {
             const Icon = pillarIcons[index];
             const pillarLinks = ['/rescue', '/adopt', '/about', '/support'];
             return (
-              <Link
-                href={routeFor(locale, pillarLinks[index])}
-                className="pillar"
-                key={item.title}
-                aria-label={`${item.title}: ${item.description}`}
-              >
-                <div className="pillar-illustration" aria-hidden="true">
-                  <Icon className="pillar-svg" width={46} height={46} />
-                </div>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </Link>
+              <EditorialReveal key={item.title} delay={index * 0.07} y={22}>
+                <Link
+                  href={routeFor(locale, pillarLinks[index])}
+                  className="pillar"
+                  aria-label={`${item.title}: ${item.description}`}
+                >
+                  <div className="pillar-illustration" aria-hidden="true">
+                    <Icon className="pillar-svg" width={46} height={46} />
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </Link>
+              </EditorialReveal>
             );
           })}
         </div>
@@ -118,17 +127,21 @@ export default async function HomePage({ params }: Props) {
       {/* 3. Meet the Cats */}
       <section className="cats-home-section">
         <div className="container">
-          <SectionIntro
-            eyebrow={t.home.catsEyebrow}
-            title={t.home.catsTitle}
-            action={{
-              href: routeFor(locale, '/cats'),
-              label: locale === 'vi' ? 'Xem tất cả các bé mèo' : 'View all cats',
-            }}
-          />
+          <EditorialReveal y={20}>
+            <SectionIntro
+              eyebrow={t.home.catsEyebrow}
+              title={t.home.catsTitle}
+              action={{
+                href: routeFor(locale, '/cats'),
+                label: locale === 'vi' ? 'Xem tất cả các bé mèo' : 'View all cats',
+              }}
+            />
+          </EditorialReveal>
           <div className="cat-grid">
-            {cats.map((cat) => (
-              <CatCard key={cat.slug} cat={cat} locale={locale} />
+            {cats.map((cat, idx) => (
+              <EditorialReveal key={cat.slug} delay={idx * 0.07} y={24}>
+                <CatCard cat={cat} locale={locale} />
+              </EditorialReveal>
             ))}
           </div>
         </div>
@@ -137,7 +150,7 @@ export default async function HomePage({ params }: Props) {
       {/* 4. Our Story */}
       <section className="story-section">
         <div className="container story-grid">
-          <div className="story-photo-wrapper">
+          <EditorialReveal className="story-photo-wrapper" y={24}>
             <div className="story-photo">
               <Image
                 src="/images/story.webp"
@@ -157,17 +170,17 @@ export default async function HomePage({ params }: Props) {
               </svg>
             </div>
             {/* Editorial callout badge anchored to photo */}
-            <div className="story-side-badge" aria-hidden="true">
+            <FloatingBadge className="story-side-badge">
               <div className="badge-paws">
                 <PawPrint size={15} fill="currentColor" />
                 <PawPrint size={19} fill="currentColor" />
                 <PawPrint size={14} fill="currentColor" />
               </div>
               <p>{locale === 'vi' ? 'Những hành động nhỏ tạo nên thay đổi lớn' : 'Small actions create big change'}</p>
-            </div>
-          </div>
+            </FloatingBadge>
+          </EditorialReveal>
 
-          <div className="story-copy">
+          <EditorialReveal className="story-copy" delay={0.1} y={24}>
             <p className="eyebrow story-eyebrow">{t.home.storyEyebrow}</p>
             <h2 className="story-heading">{t.home.storyTitle}</h2>
             <p className="story-paragraph">{t.home.storyP1}</p>
@@ -177,7 +190,7 @@ export default async function HomePage({ params }: Props) {
                 {t.home.storyButton}
               </ButtonLink>
             </div>
-          </div>
+          </EditorialReveal>
         </div>
       </section>
 
@@ -185,13 +198,13 @@ export default async function HomePage({ params }: Props) {
       {/* 5. Impact Counter Bar */}
       <section className="impact-section">
         <div className="container impact-grid">
-          <div className="impact-head">
+          <EditorialReveal className="impact-head" y={18}>
             <span>{t.home.impactTitle}</span>
             <Heart size={20} fill="currentColor" aria-hidden="true" className="impact-heart" />
-          </div>
+          </EditorialReveal>
 
           {/* 1. PawPrint */}
-          <div className="impact-item">
+          <EditorialReveal className="impact-item" delay={0.05} y={18}>
             <div className="impact-icon-wrap icon-green">
               <PawPrint size={30} strokeWidth={1.8} aria-hidden="true" />
             </div>
@@ -199,10 +212,10 @@ export default async function HomePage({ params }: Props) {
               <h3>{t.home.impact[0].title}</h3>
               <p>{t.home.impact[0].description}</p>
             </div>
-          </div>
+          </EditorialReveal>
 
           {/* 2. House */}
-          <div className="impact-item">
+          <EditorialReveal className="impact-item" delay={0.1} y={18}>
             <div className="impact-icon-wrap icon-green">
               <House size={30} strokeWidth={1.8} aria-hidden="true" />
             </div>
@@ -210,10 +223,10 @@ export default async function HomePage({ params }: Props) {
               <h3>{t.home.impact[1].title}</h3>
               <p>{t.home.impact[1].description}</p>
             </div>
-          </div>
+          </EditorialReveal>
 
           {/* 3. Heart */}
-          <div className="impact-item">
+          <EditorialReveal className="impact-item" delay={0.15} y={18}>
             <div className="impact-icon-wrap icon-red">
               <Heart size={30} fill="currentColor" strokeWidth={1.8} aria-hidden="true" />
             </div>
@@ -221,10 +234,10 @@ export default async function HomePage({ params }: Props) {
               <h3>{t.home.impact[2].title}</h3>
               <p>{t.home.impact[2].description}</p>
             </div>
-          </div>
+          </EditorialReveal>
 
           {/* 4. UsersRound */}
-          <div className="impact-item">
+          <EditorialReveal className="impact-item" delay={0.2} y={18}>
             <div className="impact-icon-wrap icon-green">
               <UsersRound size={30} strokeWidth={1.8} aria-hidden="true" />
             </div>
@@ -232,7 +245,7 @@ export default async function HomePage({ params }: Props) {
               <h3>{t.home.impact[3].title}</h3>
               <p>{t.home.impact[3].description}</p>
             </div>
-          </div>
+          </EditorialReveal>
         </div>
       </section>
 
