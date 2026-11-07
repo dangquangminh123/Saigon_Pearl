@@ -27,9 +27,11 @@ export function RescueHeartDiagram({ locale }: { locale: Locale }) {
   return (
     <section className={styles.section} aria-labelledby="rescue-heart-heading" data-rescue-heart>
       <div className={styles.inner}>
-        <h2 id="rescue-heart-heading" className={styles.srOnly}>
-          {copy.heading}
-        </h2>
+        <header className={styles.heading}>
+          <p className={styles.eyebrow}>{copy.centerSmall}</p>
+          <h2 id="rescue-heart-heading">{copy.heading}</h2>
+          <p className={styles.intro}>{copy.diagramLabel}</p>
+        </header>
 
         <RescueHeartMotion>
           <div className={styles.diagram} role="group" aria-label={copy.diagramLabel}>

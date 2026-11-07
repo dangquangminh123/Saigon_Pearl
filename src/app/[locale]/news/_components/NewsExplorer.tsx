@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Search, BookOpen } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Article } from '@/data/articles';
 import type { Locale } from '@/lib/i18n';
 import { routeFor } from '@/lib/i18n';
@@ -30,6 +31,7 @@ type Props = {
 
 export function NewsExplorer({ locale, items }: Props) {
   const copy = newsCopy[locale];
+  const shouldReduce = useReducedMotion();
   const [topic, setTopic] = useState<NewsTopic>('all');
   const [term, setTerm] = useState('');
   const [visibleCount, setVisibleCount] = useState(6);
@@ -87,47 +89,57 @@ export function NewsExplorer({ locale, items }: Props) {
         </label>
       </div>
 
-      <div className={styles.postGrid} aria-live="polite">
-        {shown.slice(0, visibleCount).map((article) => (
-          <article className={styles.postCard} key={article.slug}>
-            <Link
-              className={styles.postImageLink}
-              href={routeFor(locale, `/news/${article.slug}`)}
-              aria-label={article.title[locale]}
+      <motion.div layout className={styles.postGrid} aria-live="polite">
+        <AnimatePresence mode="popLayout" initial={false}>
+          {shown.slice(0, visibleCount).map((article, idx) => (
+            <motion.article
+              layout={!shouldReduce}
+              className={styles.postCard}
+              key={article.slug}
+              initial={shouldReduce ? { opacity: 0 } : { opacity: 0, y: 14, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 0.96, transition: { duration: 0.16, ease: [0.4, 0, 1, 1] } }}
+              transition={{ duration: 0.28, delay: shouldReduce ? 0 : Math.min(idx * 0.035, 0.18), ease: [0.22, 1, 0.36, 1] }}
             >
-              <Image
-                src={article.image}
-                alt={
-                  newsEditorial[article.slug]?.imageVerified
-                    ? (newsEditorial[article.slug]?.imageAlt?.[locale] ?? copy.imagePlaceholder)
-                    : copy.imagePlaceholder
-                }
-                fill
-                sizes="(max-width: 700px) 100vw, (max-width: 1040px) 48vw, 31vw"
-                className={styles.coverImage}
-              />
-            </Link>
-            <div className={styles.postBody}>
-              <span className={styles.categoryLabel}>
-                {copy.category[topicForArticle(article.slug)]}
-              </span>
-              <h3 className={styles.postTitle}>
-                <Link href={routeFor(locale, `/news/${article.slug}`)}>
-                  {article.title[locale]}
-                </Link>
-              </h3>
-              <p className={styles.postExcerpt}>{article.description[locale]}</p>
               <Link
-                className={styles.readLink}
+                className={styles.postImageLink}
                 href={routeFor(locale, `/news/${article.slug}`)}
+                aria-label={article.title[locale]}
               >
-                {copy.read}
-                <ArrowUpRight size={17} aria-hidden="true" />
+                <Image
+                  src={article.image}
+                  alt={
+                    newsEditorial[article.slug]?.imageVerified
+                      ? (newsEditorial[article.slug]?.imageAlt?.[locale] ?? copy.imagePlaceholder)
+                      : copy.imagePlaceholder
+                  }
+                  fill
+                  sizes="(max-width: 700px) 100vw, (max-width: 1040px) 48vw, 31vw"
+                  className={styles.coverImage}
+                />
               </Link>
-            </div>
-          </article>
-        ))}
-      </div>
+              <div className={styles.postBody}>
+                <span className={styles.categoryLabel}>
+                  {copy.category[topicForArticle(article.slug)]}
+                </span>
+                <h3 className={styles.postTitle}>
+                  <Link href={routeFor(locale, `/news/${article.slug}`)}>
+                    {article.title[locale]}
+                  </Link>
+                </h3>
+                <p className={styles.postExcerpt}>{article.description[locale]}</p>
+                <Link
+                  className={styles.readLink}
+                  href={routeFor(locale, `/news/${article.slug}`)}
+                >
+                  {copy.read}
+                  <ArrowUpRight size={17} aria-hidden="true" />
+                </Link>
+              </div>
+            </motion.article>
+          ))}
+        </AnimatePresence>
+      </motion.div>
 
       {shown.length === 0 && (
         <div className={styles.emptyState} role="status">

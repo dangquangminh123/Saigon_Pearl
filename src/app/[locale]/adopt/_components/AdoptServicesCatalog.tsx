@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -20,6 +20,7 @@ import {
   PawPrint,
   Heart
 } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import styles from '../adopt.module.css';
 import type { AdoptContent, AdoptServiceItem } from '@/data/adopt-services';
 import { routeFor } from '@/lib/i18n';
@@ -30,6 +31,7 @@ interface Props {
 }
 
 export function AdoptServicesCatalog({ content, locale }: Props) {
+  const shouldReduce = useReducedMotion();
   const [activeTab, setActiveTab] = useState<string>('all');
   const [selectedService, setSelectedService] = useState<AdoptServiceItem | null>(null);
 
@@ -46,20 +48,47 @@ export function AdoptServicesCatalog({ content, locale }: Props) {
     ? content.services
     : content.services.filter((s) => s.category === activeTab);
 
-  // ESC key to close modal
+  // ESC key + focus trap to close modal
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedService(null);
-    };
-    if (selectedService) {
-      window.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
-    } else {
+    if (!selectedService) {
       document.body.style.overflow = '';
+      return;
     }
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = 'hidden';
+    closeBtnRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedService(null);
+        return;
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusable = Array.from(
+          modalRef.current.querySelectorAll<HTMLElement>(
+            'button:not([disabled]), a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          )
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (!first || !last) return;
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
+      previouslyFocused?.focus();
     };
   }, [selectedService]);
 
@@ -177,7 +206,7 @@ export function AdoptServicesCatalog({ content, locale }: Props) {
                   {/* Badge Icon on edge */}
                   <div className={styles.iconWrap}>
                     <div className={styles.masterIcon} title={service.tag}>
-                      {renderIcon(service.iconName, 26)}
+                      {renderIcon(service.iconName, 22)}
                     </div>
                   </div>
                 </div>
@@ -325,80 +354,101 @@ export function AdoptServicesCatalog({ content, locale }: Props) {
       {/* ===================================================================
           INTERACTIVE SERVICE DETAIL MODAL LIGHTBOX
           =================================================================== */}
-      {selectedService && (
-        <div
-          className={styles.modalBackdrop}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setSelectedService(null);
-          }}
-        >
-          <div className={styles.modalContent} role="dialog" aria-modal="true">
-            <div className={styles.modalHeader}>
-              <div>
-                <span className={styles.cardTag}>{selectedService.tag}</span>
-                <h3 className={styles.headline} style={{ margin: '6px 0 0' }}>
-                  {selectedService.title.replace(/\n/g, ' ')}
-                </h3>
-              </div>
-              <button
-                type="button"
-                className={styles.modalCloseBtn}
-                aria-label="Close"
-                onClick={() => setSelectedService(null)}
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <div className={styles.modalBody}>
-              <Image
-                src={selectedService.image}
-                alt={selectedService.title}
-                width={600}
-                height={260}
-                className={styles.modalImageHero}
-              />
-
-              <p className={styles.modalOverview}>
-                {selectedService.fullDetails.overview}
-              </p>
-
-              <h4 className={styles.modalHighlightTitle}>
-                {locale === 'vi' ? 'Điểm nổi bật của chương trình:' : 'Key Program Highlights:'}
-              </h4>
-              <ul className={styles.modalHighlightList}>
-                {selectedService.fullDetails.highlights.map((point, idx) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
-
-              <div className={styles.modalCommitmentBox}>
-                <strong>{locale === 'vi' ? 'Cam kết của cộng đồng: ' : 'Community Pledge: '}</strong>
-                {selectedService.fullDetails.commitment}
-              </div>
-
-              <div className={styles.modalActions}>
-                <Link
-                  href={routeFor(locale as 'vi' | 'en', '/cats')}
-                  className={styles.masterButton}
-                  onClick={() => setSelectedService(null)}
-                >
-                  <PawPrint size={15} />
-                  <span>{locale === 'vi' ? 'Gặp các bé mèo sẵn sàng' : 'Meet Available Cats'}</span>
-                </Link>
+      <AnimatePresence>
+        {selectedService && (
+          <motion.div
+            className={styles.modalBackdrop}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setSelectedService(null);
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.div
+              ref={modalRef}
+              className={styles.modalContent}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="adopt-modal-title"
+              initial={shouldReduce ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={
+                shouldReduce
+                  ? { opacity: 0 }
+                  : { opacity: 0, y: 10, scale: 0.97, transition: { duration: 0.16, ease: [0.4, 0, 1, 1] } }
+              }
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className={styles.modalHeader}>
+                <div>
+                  <span className={styles.cardTag}>{selectedService.tag}</span>
+                  <h3 id="adopt-modal-title" className={styles.headline} style={{ margin: '6px 0 0' }}>
+                    {selectedService.title.replace(/\n/g, ' ')}
+                  </h3>
+                </div>
                 <button
+                  ref={closeBtnRef}
                   type="button"
-                  className={styles.masterButton}
-                  style={{ backgroundColor: '#DCE5D7', color: '#2F3C2C' }}
+                  className={styles.modalCloseBtn}
+                  aria-label={locale === 'vi' ? 'Đóng cửa sổ' : 'Close'}
                   onClick={() => setSelectedService(null)}
                 >
-                  <span>{locale === 'vi' ? 'Đóng lại' : 'Close'}</span>
+                  <X size={20} />
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+
+              <div className={styles.modalBody}>
+                <Image
+                  src={selectedService.image}
+                  alt={selectedService.title}
+                  width={600}
+                  height={260}
+                  className={styles.modalImageHero}
+                />
+
+                <p className={styles.modalOverview}>
+                  {selectedService.fullDetails.overview}
+                </p>
+
+                <h4 className={styles.modalHighlightTitle}>
+                  {locale === 'vi' ? 'Điểm nổi bật của chương trình:' : 'Key Program Highlights:'}
+                </h4>
+                <ul className={styles.modalHighlightList}>
+                  {selectedService.fullDetails.highlights.map((point, idx) => (
+                    <li key={idx}>{point}</li>
+                  ))}
+                </ul>
+
+                <div className={styles.modalCommitmentBox}>
+                  <strong>{locale === 'vi' ? 'Cam kết của cộng đồng: ' : 'Community Pledge: '}</strong>
+                  {selectedService.fullDetails.commitment}
+                </div>
+
+                <div className={styles.modalActions}>
+                  <Link
+                    href={routeFor(locale as 'vi' | 'en', '/cats')}
+                    className={styles.masterButton}
+                    onClick={() => setSelectedService(null)}
+                  >
+                    <PawPrint size={15} />
+                    <span>{locale === 'vi' ? 'Gặp các bé mèo sẵn sàng' : 'Meet Available Cats'}</span>
+                  </Link>
+                  <button
+                    type="button"
+                    className={styles.masterButton}
+                    style={{ backgroundColor: '#DCE5D7', color: '#2F3C2C' }}
+                    onClick={() => setSelectedService(null)}
+                  >
+                    <span>{locale === 'vi' ? 'Đóng lại' : 'Close'}</span>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

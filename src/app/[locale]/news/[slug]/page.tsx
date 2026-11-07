@@ -9,6 +9,7 @@ import { articles } from '@/data/articles';
 import { newsCopy, newsEditorial, topicForArticle } from '@/data/news-editorial';
 import { isLocale, routeFor } from '@/lib/i18n';
 import { brand, pageMetadata, siteUrl } from '@/lib/site';
+import { ReadingProgressBar } from '@/components/motion/EditorialMotion';
 import { ShareArticle } from '../_components/ShareArticle';
 import styles from '../news.module.css';
 
@@ -81,6 +82,7 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <div className={styles.page} data-page="community-article">
+      <ReadingProgressBar label={locale === 'vi' ? 'Tiến độ đọc bài viết' : 'Article reading progress'} />
       <section className={styles.articleHead}>
         <div className={styles.readingContainer}>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">

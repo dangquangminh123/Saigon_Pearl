@@ -1,8 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Clock, AlertTriangle, X, ShieldCheck } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Locale } from '@/lib/i18n';
 import type { GuideCategory, GuideArticle } from '@/data/rescue-guide';
 import styles from '../rescue.module.css';
@@ -22,8 +23,51 @@ export function RescueCatalog({
   readMoreLabel,
   featuredBadgeLabel,
 }: Props) {
+  const shouldReduce = useReducedMotion();
   const [selectedCategory, setSelectedCategory] = useState<GuideCategory>('all');
   const [activeArticle, setActiveArticle] = useState<GuideArticle | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!activeArticle) {
+      document.body.style.overflow = '';
+      return;
+    }
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = 'hidden';
+    closeBtnRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setActiveArticle(null);
+        return;
+      }
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusable = Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>(
+            'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+          )
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (!first || !last) return;
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+      previouslyFocused?.focus();
+    };
+  }, [activeArticle]);
 
   const filteredArticles = selectedCategory === 'all'
     ? articles
@@ -150,61 +194,81 @@ export function RescueCatalog({
       </div>
 
       {/* 3. Detail Lightbox Modal when clicking an article */}
-      {activeArticle && (
-        <div className={styles.modalOverlay} role="presentation" onClick={() => setActiveArticle(null)}>
-          <div
-            className={styles.modalDialog}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {activeArticle && (
+          <motion.div
+            className={styles.modalOverlay}
+            role="presentation"
+            onClick={() => setActiveArticle(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <button
-              type="button"
-              className={styles.modalCloseBtn}
-              onClick={() => setActiveArticle(null)}
-              aria-label={locale === 'vi' ? 'Đóng cửa sổ' : 'Close modal'}
+            <motion.div
+              ref={dialogRef}
+              className={styles.modalDialog}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
+              onClick={(e) => e.stopPropagation()}
+              initial={shouldReduce ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={
+                shouldReduce
+                  ? { opacity: 0 }
+                  : { opacity: 0, y: 10, scale: 0.97, transition: { duration: 0.16, ease: [0.4, 0, 1, 1] } }
+              }
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
-              <X size={20} aria-hidden="true" />
-            </button>
+              <button
+                ref={closeBtnRef}
+                type="button"
+                className={styles.modalCloseBtn}
+                onClick={() => setActiveArticle(null)}
+                aria-label={locale === 'vi' ? 'Đóng cửa sổ' : 'Close modal'}
+              >
+                <X size={20} aria-hidden="true" />
+              </button>
 
-            <div className={styles.modalHeader}>
-              <span className={styles.categoryBadge}>{activeArticle.categoryLabel[locale]}</span>
-              <h2 id="modal-title" className={styles.modalTitle}>
-                {activeArticle.title[locale]}
-              </h2>
-              <div className={styles.modalMeta}>
-                <span>{activeArticle.date}</span>
-                <span>&bull;</span>
-                <span>{activeArticle.readTime[locale]}</span>
+              <div className={styles.modalHeader}>
+                <span className={styles.categoryBadge}>{activeArticle.categoryLabel[locale]}</span>
+                <h2 id="modal-title" className={styles.modalTitle}>
+                  {activeArticle.title[locale]}
+                </h2>
+                <div className={styles.modalMeta}>
+                  <span>{activeArticle.date}</span>
+                  <span>&bull;</span>
+                  <span>{activeArticle.readTime[locale]}</span>
+                </div>
               </div>
-            </div>
 
-            <div className={styles.modalImageWrap}>
-              <Image
-                src={activeArticle.image}
-                alt={activeArticle.alt[locale]}
-                fill
-                sizes="800px"
-                className={styles.cardImage}
-              />
-            </div>
-
-            <div className={styles.modalBody}>
-              <p className={styles.modalLead}>{activeArticle.summary[locale]}</p>
-
-              <div className={styles.modalNotice}>
-                <ShieldCheck size={22} className={styles.modalNoticeIcon} aria-hidden="true" />
-                <p>
-                  {locale === 'vi'
-                    ? 'Mọi hướng dẫn trên nhằm phục vụ sơ cấp cứu ban đầu. Đối với các tình huống chấn thương nặng hoặc bệnh lý phức tạp, hãy đưa mèo đến phòng khám thú y gần nhất càng sớm càng tốt.'
-                    : 'All instructions are intended for initial first aid. In cases of severe trauma or complex illnesses, transport the cat to the nearest veterinary hospital promptly.'}
-                </p>
+              <div className={styles.modalImageWrap}>
+                <Image
+                  src={activeArticle.image}
+                  alt={activeArticle.alt[locale]}
+                  fill
+                  sizes="800px"
+                  className={styles.cardImage}
+                />
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+
+              <div className={styles.modalBody}>
+                <p className={styles.modalLead}>{activeArticle.summary[locale]}</p>
+
+                <div className={styles.modalNotice}>
+                  <ShieldCheck size={22} className={styles.modalNoticeIcon} aria-hidden="true" />
+                  <p>
+                    {locale === 'vi'
+                      ? 'Mọi hướng dẫn trên nhằm phục vụ sơ cấp cứu ban đầu. Đối với các tình huống chấn thương nặng hoặc bệnh lý phức tạp, hãy đưa mèo đến phòng khám thú y gần nhất càng sớm càng tốt.'
+                      : 'All instructions are intended for initial first aid. In cases of severe trauma or complex illnesses, transport the cat to the nearest veterinary hospital promptly.'}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

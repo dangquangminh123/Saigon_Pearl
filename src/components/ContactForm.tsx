@@ -2,6 +2,7 @@
 
 import { type FormEvent, useEffect, useState } from 'react';
 import { Check, ClipboardCopy, Heart, Mail, Send } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { Locale } from '@/lib/i18n';
 import { getDictionary } from '@/lib/dictionaries';
 
@@ -9,6 +10,7 @@ const verifiedContactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || '';
 
 export function ContactForm({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
+  const shouldReduce = useReducedMotion();
   const [topic, setTopic] = useState('adopt');
   const [prepared, setPrepared] = useState('');
   const [copied, setCopied] = useState(false);
@@ -53,7 +55,26 @@ export function ContactForm({ locale }: { locale: Locale }) {
       <label>{t.contact.formMessage}<textarea name="message" placeholder={t.contact.formMessagePlaceholder} rows={6} minLength={10} maxLength={3000} required /></label>
       <button type="submit" className="btn btn-primary submit-button"><span>{verifiedContactEmail ? t.contact.send : t.contact.prepare}</span>{verifiedContactEmail ? <Send size={17} /> : <ClipboardCopy size={17} />}</button>
     </form>
-    {prepared && <div className="prepared-message" aria-live="polite"><h3><Check size={18} aria-hidden="true" />{t.contact.copiedTitle}</h3><p>{t.contact.copiedDesc}</p><textarea readOnly rows={8} value={prepared} aria-label={t.contact.copiedTitle} /><button type="button" className="btn btn-outline" onClick={copyMessage}><span>{copied ? t.contact.copied : t.contact.copy}</span>{copied ? <Check size={17} /> : <ClipboardCopy size={17} />}</button></div>}
+    <AnimatePresence>
+      {prepared && (
+        <motion.div
+          className="prepared-message"
+          aria-live="polite"
+          initial={shouldReduce ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <h3><Check size={18} aria-hidden="true" />{t.contact.copiedTitle}</h3>
+          <p>{t.contact.copiedDesc}</p>
+          <textarea readOnly rows={8} value={prepared} aria-label={t.contact.copiedTitle} />
+          <button type="button" className="btn btn-outline" onClick={copyMessage}>
+            <span>{copied ? t.contact.copied : t.contact.copy}</span>
+            {copied ? <Check size={17} /> : <ClipboardCopy size={17} />}
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
     <p className="form-privacy"><Heart size={14} aria-hidden="true" />{t.contact.privacy}</p>
   </div>;
 }

@@ -233,34 +233,38 @@
   box-shadow: 0 4px 14px rgba(155, 120, 98, 0.3);
 }
 
-/* 4-Columns Grid (Wanzor style-2 layout) */
+/* 4-Columns Grid (Wanzor style-2 layout, proportioned for editorial balance) */
 .servicesGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px 24px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px 22px;
 }
 
 /* Master Image Box (Elementor image-box-style-2) */
 .masterImageBox {
-  margin: 110px 0 10px;
+  margin: 68px 0 8px;
   text-align: center;
   position: relative;
   overflow: visible;
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.masterImageBox:hover {
-  transform: translateY(-8px);
+@media (hover: hover) and (pointer: fine) {
+  .masterImageBox:hover {
+    transform: translateY(-6px);
+  }
 }
 
 /* Thumb circle on top */
 .thumb {
   position: absolute;
-  top: -110px;
+  top: -68px;
   left: 50%;
   transform: translateX(-50%);
-  width: 220px;
-  height: 220px;
+  width: 148px;
+  height: 148px;
   display: inline-block;
   justify-content: center;
   align-items: center;
@@ -273,8 +277,8 @@
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(69, 61, 53, 0.18);
-  border: 6px solid #FFFEFB;
+  box-shadow: 0 10px 28px rgba(69, 61, 53, 0.16);
+  border: 5px solid #FFFEFB;
   background-color: #E2DBD0;
   position: relative;
 }
@@ -284,53 +288,58 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.masterImageBox:hover .thumbImg {
-  transform: scale(1.08);
+@media (hover: hover) and (pointer: fine) {
+  .masterImageBox:hover .thumbImg {
+    transform: scale(1.06);
+  }
 }
 
 /* Icon badge on bottom-right of circle thumb */
 .iconWrap {
   position: absolute;
-  bottom: -6px;
-  right: 6px;
+  bottom: -4px;
+  right: 2px;
   z-index: 3;
 }
 
 .masterIcon {
-  width: 68px;
-  height: 68px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background-color: #FFFEFB;
-  box-shadow: 2px 5px 28px rgba(69, 61, 53, 0.16);
+  box-shadow: 2px 5px 20px rgba(69, 61, 53, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #9B7862;
   border: 2px solid #DCE5D7;
-  transition: all 0.3s ease;
+  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.25s ease, color 0.25s ease;
 }
 
-.masterImageBox:hover .masterIcon {
-  background-color: #DCE5D7;
-  color: #354432;
-  transform: rotate(8deg) scale(1.06);
+@media (hover: hover) and (pointer: fine) {
+  .masterImageBox:hover .masterIcon {
+    background-color: #DCE5D7;
+    color: #354432;
+    transform: rotate(6deg) scale(1.05);
+  }
 }
 
 /* Content Wrap (Card body) */
 .contentWrap {
   position: relative;
-  padding: 135px 24px 44px;
+  padding: 96px 22px 26px;
   background-color: #FFFEFB;
   border-radius: 20px;
-  box-shadow: 0 10px 45px rgba(69, 61, 53, 0.07);
-  border: 1px solid rgba(155, 120, 98, 0.12);
-  margin-bottom: 20px;
+  box-shadow: 0 10px 36px rgba(69, 61, 53, 0.06);
+  border: 1px solid rgba(155, 120, 98, 0.14);
+  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
-  min-height: 380px;
+  flex: 1;
+  min-height: 340px;
 }
 
 /* Sage bottom accent bar (wanzor :after) */
@@ -340,17 +349,19 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 18px;
+  height: 16px;
   z-index: -1;
   background-color: #DCE5D7;
   border-radius: 20px;
-  transform: translateY(-3px);
-  transition: 0.3s all ease;
+  transform: translateY(-2px);
+  transition: transform 0.26s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.26s ease;
 }
 
-.masterImageBox:hover .contentWrap::after {
-  transform: translateY(4px);
-  background-color: #9B7862;
+@media (hover: hover) and (pointer: fine) {
+  .masterImageBox:hover .contentWrap::after {
+    transform: translateY(4px);
+    background-color: #9B7862;
+  }
 }
 
 .cardTag {
@@ -364,18 +375,18 @@
   background-color: #F1ECE2;
   padding: 4px 12px;
   border-radius: 999px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .headline {
   font-family: var(--font-be-vietnam), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 21px;
+  font-size: 19.5px;
   font-weight: 700;
   color: #453D35;
-  line-height: 1.35;
-  margin: 0 0 12px;
+  line-height: 1.32;
+  margin: 0 0 10px;
   white-space: pre-line;
-  transition: color 0.3s ease;
+  transition: color 0.22s ease;
 }
 
 .masterImageBox:hover .headline {
@@ -386,54 +397,49 @@
   font-size: 14px;
   line-height: 1.6;
   color: #65584E;
-  margin: 0 0 16px;
+  margin: 0 0 18px;
   flex-grow: 1;
 }
 
-/* Button reveal at bottom on hover (btn-hover-2) */
+/* Action button is ALWAYS visible (no hover-only anti-pattern) */
 .urlWrap {
-  position: absolute;
-  bottom: -18px;
-  left: 50%;
-  transform: translate(-50%, 8px);
-  width: fit-content;
-  opacity: 0;
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 5;
-}
-
-.masterImageBox:hover .urlWrap {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
   opacity: 1;
-  transform: translate(-50%, 0);
+  margin-top: auto;
+  padding-top: 6px;
+  display: flex;
+  justify-content: center;
+  z-index: 5;
 }
 
 .masterButton {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  min-height: 44px;
   gap: 8px;
   background-color: #9B7862;
   color: #FFFEFB;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
-  padding: 10px 24px;
+  padding: 10px 22px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(155, 120, 98, 0.35);
-  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(155, 120, 98, 0.25);
+  transition: transform 0.22s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.22s ease, box-shadow 0.22s ease;
   white-space: nowrap;
 }
 
-.masterButton:hover {
-  background-color: #795D4D;
-  transform: scale(1.05);
-}
-
-/* Mobile permanent button */
-@media (max-width: 992px) {
-  .urlWrap {
-    opacity: 1 !important;
-    transform: translate(-50%, 0) !important;
+@media (hover: hover) and (pointer: fine) {
+  .masterButton:hover {
+    background-color: #795D4D;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(155, 120, 98, 0.35);
   }
 }
 
@@ -1135,6 +1141,10 @@
     padding-left: 16px;
     padding-right: 16px;
   }
+  .formInput,
+  .formSelect {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1142,31 +1152,39 @@
     padding-inline: 14px;
   }
   .masterImageBox {
-    margin: 90px 0 10px;
+    margin: 62px 0 6px;
   }
   .thumb {
-    width: 180px;
-    height: 180px;
-    top: -90px;
+    width: 136px;
+    height: 136px;
+    top: -62px;
   }
   .thumbInner {
     border-width: 4px;
   }
-  .iconWrap {
-    width: 46px;
-    height: 46px;
-    bottom: -4px;
-    right: 4px;
+  .contentWrap {
+    padding: 88px 18px 22px;
+    min-height: auto;
   }
-  .iconWrap svg {
-    width: 20px;
-    height: 20px;
+  .masterIcon {
+    width: 44px;
+    height: 44px;
   }
   .headline {
-    font-size: 19px;
+    font-size: 18.5px;
   }
   .desc {
     font-size: 13.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adoptPage *,
+  .adoptPage *::before,
+  .adoptPage *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

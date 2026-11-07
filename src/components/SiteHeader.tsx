@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Heart, Menu, Search, X } from 'lucide-react';
+import { AnimatePresence } from 'motion/react';
 import type { Locale } from '@/lib/i18n';
 import { routeFor } from '@/lib/i18n';
 import { navigation } from '@/lib/nav';
@@ -34,14 +35,19 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Prevent background scroll when mobile menu is open
+  // Prevent background scroll and allow Escape key to close mobile menu when open
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
+    if (!menuOpen) {
       document.body.style.overflow = '';
+      return;
     }
+    document.body.style.overflow = 'hidden';
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
     return () => {
+      window.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = '';
     };
   }, [menuOpen]);
@@ -136,7 +142,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           </div>
         </nav>
       </header>
-      {searchOpen && <SearchDialog locale={locale} onClose={() => setSearchOpen(false)} />}
+      <AnimatePresence>
+        {searchOpen && <SearchDialog locale={locale} onClose={() => setSearchOpen(false)} />}
+      </AnimatePresence>
     </>
   );
 }

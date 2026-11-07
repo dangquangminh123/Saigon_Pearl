@@ -42,8 +42,8 @@ export function SectionIntro({
   return (
     <div className={`section-intro ${className}`}>
       <div className="section-intro-text">
+        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h2 className="section-title">{title}</h2>
-        {eyebrow && <p className="section-subtitle">{eyebrow}</p>}
         {description && <p className="section-description">{description}</p>}
       </div>
       {action && (

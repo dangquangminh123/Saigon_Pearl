@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Check, Heart, Package, Stethoscope, Users } from 'lucide-react';
+import Image from 'next/image';
+import { Check, Package, Stethoscope, Users } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { isLocale, routeFor } from '@/lib/i18n';
 import { getDictionary } from '@/lib/dictionaries';
@@ -53,17 +54,21 @@ export default async function SupportPage({ params }: Props) {
             <h2 className="content-heading">{t.support.principlesTitle}</h2>
             <ul className="principle-list">
               {t.support.principles.map((text) => (
-                <li key={text}><Check size={19} aria-hidden="true" />{text}</li>
+                <li key={text}><Check size={19} aria-hidden="true" /><span>{text}</span></li>
               ))}
             </ul>
             <div className="inline-cta">
-              <ButtonLink href={routeFor(locale, '/transparency')}>{t.support.cta}</ButtonLink>
+              <ButtonLink href={routeFor(locale, '/transparency')} arrow>{t.support.cta}</ButtonLink>
             </div>
           </div>
           <div className="photo-large">
-            <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', background: '#E9EEDF' }}>
-              <Heart size={160} strokeWidth={0.7} color="#9B7862" aria-hidden="true" />
-            </div>
+            <Image
+              src="/images/cta-care.webp"
+              alt={locale === 'vi' ? 'Ảnh minh họa chăm sóc mèo cộng đồng' : 'Illustrative photo of community cat care'}
+              fill
+              sizes="(max-width: 991px) 92vw, 44vw"
+              className="cover-image"
+            />
           </div>
         </div>
       </section>

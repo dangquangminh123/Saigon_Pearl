@@ -31,8 +31,8 @@ export function FindHomeIcon(props: SVGProps<SVGSVGElement>) {
       {/* Heart on top right of roof */}
       <path
         d="M45 13 C45 10.8 46.8 9 49 9 C50.2 9 51.3 9.6 52 10.5 C52.7 9.6 53.8 9 55 9 C57.2 9 59 10.8 59 13 C59 16.5 52 21 52 21 C52 21 45 16.5 45 13 Z"
-        fill="#E75A3C"
-        stroke="#E75A3C"
+        fill="currentColor"
+        stroke="currentColor"
         strokeWidth={1}
       />
     </svg>
@@ -54,8 +54,8 @@ export function CommunityIcon(props: SVGProps<SVGSVGElement>) {
       {/* Heart above center person */}
       <path
         d="M27 15 C27 13.3 28.3 12 30 12 C30.9 12 31.7 12.4 32 13 C32.3 12.4 33.1 12 34 12 C35.7 12 37 13.3 37 15 C37 17.5 32 21 32 21 C32 21 27 17.5 27 15 Z"
-        fill="#E75A3C"
-        stroke="#E75A3C"
+        fill="currentColor"
+        stroke="currentColor"
         strokeWidth={1}
       />
     </svg>
@@ -68,8 +68,8 @@ export function SupportHandsIcon(props: SVGProps<SVGSVGElement>) {
       {/* Heart floating above */}
       <path
         d="M24 19 C24 15.5 27 13 30 13 C31.2 13 32.3 13.7 32 14.5 C31.7 13.7 32.8 13 34 13 C37 13 40 15.5 40 19 C40 23.5 32 29 32 29 C32 29 24 23.5 24 19 Z"
-        fill="#E75A3C"
-        stroke="#E75A3C"
+        fill="currentColor"
+        stroke="currentColor"
         strokeWidth={1}
       />
       {/* Hands holding/cupping from below */}

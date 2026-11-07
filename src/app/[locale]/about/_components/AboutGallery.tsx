@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Expand, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import styles from '../about.module.css';
 
 type GalleryItem = { src: string; alt: string; caption: string };
@@ -13,6 +14,7 @@ type Props = {
 
 export function AboutGallery({ items, labels }: Props) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const shouldReduce = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const isOpen = activeIndex !== null;
@@ -73,25 +75,53 @@ export function AboutGallery({ items, labels }: Props) {
           </button>
         ))}
       </div>
-      {active && activeIndex !== null && (
-        <div className={styles.lightboxLayer} role="presentation">
-          <div ref={dialogRef} className={styles.lightbox} role="dialog" aria-modal="true" aria-label={active.caption}>
-            <button ref={closeRef} type="button" className={`${styles.lightboxControl} ${styles.lightboxClose}`} onClick={() => setActiveIndex(null)} aria-label={labels.close}>
-              <X size={22} aria-hidden="true" />
-            </button>
-            <button type="button" className={`${styles.lightboxControl} ${styles.lightboxPrev}`} onClick={() => setActiveIndex((i) => i === null ? null : (i - 1 + items.length) % items.length)} aria-label={labels.previous}>
-              <ChevronLeft size={26} aria-hidden="true" />
-            </button>
-            <div className={styles.lightboxPhoto}>
-              <Image src={active.src} alt={active.alt} fill sizes="90vw" className={styles.lightboxImage} />
-            </div>
-            <button type="button" className={`${styles.lightboxControl} ${styles.lightboxNext}`} onClick={() => setActiveIndex((i) => i === null ? null : (i + 1) % items.length)} aria-label={labels.next}>
-              <ChevronRight size={26} aria-hidden="true" />
-            </button>
-            <p className={styles.lightboxCaption}>{active.caption} <span>— {activeIndex + 1}/{items.length}</span></p>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {active && activeIndex !== null && (
+          <motion.div
+            className={styles.lightboxLayer}
+            role="presentation"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.div
+              ref={dialogRef}
+              className={styles.lightbox}
+              role="dialog"
+              aria-modal="true"
+              aria-label={active.caption}
+              initial={shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 0.97, y: 8, transition: { duration: 0.16, ease: [0.4, 0, 1, 1] } }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <button ref={closeRef} type="button" className={`${styles.lightboxControl} ${styles.lightboxClose}`} onClick={() => setActiveIndex(null)} aria-label={labels.close}>
+                <X size={22} aria-hidden="true" />
+              </button>
+              <button type="button" className={`${styles.lightboxControl} ${styles.lightboxPrev}`} onClick={() => setActiveIndex((i) => i === null ? null : (i - 1 + items.length) % items.length)} aria-label={labels.previous}>
+                <ChevronLeft size={26} aria-hidden="true" />
+              </button>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  className={styles.lightboxPhoto}
+                  initial={shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 0.985 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Image src={active.src} alt={active.alt} fill sizes="90vw" className={styles.lightboxImage} />
+                </motion.div>
+              </AnimatePresence>
+              <button type="button" className={`${styles.lightboxControl} ${styles.lightboxNext}`} onClick={() => setActiveIndex((i) => i === null ? null : (i + 1) % items.length)} aria-label={labels.next}>
+                <ChevronRight size={26} aria-hidden="true" />
+              </button>
+              <p className={styles.lightboxCaption}>{active.caption} <span>— {activeIndex + 1}/{items.length}</span></p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

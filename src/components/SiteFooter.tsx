@@ -63,7 +63,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <span>© 2024 Saigon Pearl Purrs. {t.common.copyright}</span>
         <span className="footer-quote">
           {locale === 'vi' ? 'Những con người tử tế, Những chú mèo hạnh phúc hơn, Một Saigon Pearl tốt đẹp hơn.' : 'Kind people, Happier cats, A better Saigon Pearl.'}
-          <Heart size={13} fill="#BA4730" color="#BA4730" aria-hidden="true" style={{ display: 'inline', marginLeft: 6, verticalAlign: 'middle' }} />
+          <Heart size={13} fill="currentColor" aria-hidden="true" className="footer-heart-icon" />
         </span>
       </div>
     </footer>

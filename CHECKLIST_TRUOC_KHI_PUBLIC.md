@@ -1,4 +1,15 @@
+
+
+https://github.com/anthropics/skills/tree/main/skills/frontend-design
+https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+https://github.com/emilkowalski/skills
+https://github.com/garrytan/gstack
+
+https://github.com/LottieFiles/motion-design-skill
+https://github.com/haidrrrry/claude-remotion-skill
+https://github.com/motiondivision/motion
 # Checklist xuất bản chính thức — Saigon Pearl Purrs
+
 
 ## Nội dung và tính xác thực
 
