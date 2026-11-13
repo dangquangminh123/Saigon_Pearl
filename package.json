@@ -12,7 +12,7 @@
     "security:schemathesis": "schemathesis run security/openapi.json --url http://localhost:3000 -c status_code_conformance -c content_type_conformance -c response_headers_conformance -c response_schema_conformance -c negative_data_rejection"
   },
   "dependencies": {
-    "lucide-react": "^1.61.0",
+    "lucide-react": "^1.71.0",
     "motion": "^14.10.1",
     "next": "16.4.2",
     "react": "^19.2.0",
